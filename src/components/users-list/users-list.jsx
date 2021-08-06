@@ -1,51 +1,32 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import usersDataProps from '../../prop-types/users-data.prop';
 import UserItem from '../user-item/user-item';
+import { connect } from 'react-redux';
+import { Status } from '../../constants';
 
-const apiUrl = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}`;
-
-const query = 'name/Акимов';
-
-function UsersList() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    fetch(`${apiUrl}/users/${query}`, {
-      method: 'GET',
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setUsers(data);
-        setIsLoaded(true);
-      })
-      .catch((err) => {
-        setIsError(true);
-      });
-  }, []);
-
-  if (isError) {
-    return (
-      <div>
-        <p>Что-то пошло не так...</p>
-        <a href="/">Попробовать еще</a>
-      </div>
-    );
+function UsersList({ status, users }) {
+  if (status === Status.PENDING) {
+    return <div>Загрузка...</div>;
   }
 
   return (
     <div>
       <h1>Список пользователей</h1>
-      {
-        isLoaded
-          ? (
-            <ol>{users.map((user) => <UserItem key={user.objectInfo.dn} user={user}/>)}</ol>
-          ) : (
-            <p>Идет загрузка...</p>
-          )
-      }
+      { users.length === 0 ? <p>Нет данных</p> : <ol>{users.map((user) => <UserItem key={user.objectInfo.dn} user={user}/>)}</ol> }
     </div>
   );
 }
 
-export default UsersList;
+UsersList.propTypes = {
+  status: PropTypes.string.isRequired,
+  users: usersDataProps,
+};
+
+const mapStateToProps = (state) => ({
+  status: state.status,
+  users: state.data,
+});
+
+export {UsersList};
+export default connect(mapStateToProps, null)(UsersList);
