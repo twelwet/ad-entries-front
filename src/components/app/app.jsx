@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import SearchPage from '../pages/search-page';
 import {AppRoute} from '../../constants';
 
@@ -8,6 +8,9 @@ function App() {
     <Switch>
       <Route path={AppRoute.SEARCH} exact>
         <SearchPage />
+      </Route>
+      <Route>
+        <Redirect to={AppRoute.SEARCH}/>
       </Route>
     </Switch>
   );
