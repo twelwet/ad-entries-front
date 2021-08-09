@@ -22,7 +22,7 @@ function UsersList({ status, users }) {
 
     return (
       <div>
-        <h4 className="text-center mt-5">Найдено {users.length} совпадений</h4>
+        <h4 className="text-center mt-5">Найдено совпадений: {users.length}</h4>
         <table className="table">
           <thead>
             <tr>

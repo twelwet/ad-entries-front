@@ -18,7 +18,7 @@ const userSearchTab = [{
   searchField: SearchField.User.NICK_NAME,
 }];
 
-function NavBlock({ field, onTabClick }) {
+function SearchNav({ field, onTabClick }) {
   return (
     <ul className="nav nav-tabs">
       {
@@ -44,7 +44,7 @@ function NavBlock({ field, onTabClick }) {
   );
 }
 
-NavBlock.propTypes = {
+SearchNav.propTypes = {
   field: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
 };
@@ -59,4 +59,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBlock);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchNav);
