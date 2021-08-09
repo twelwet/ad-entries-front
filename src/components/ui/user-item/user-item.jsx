@@ -15,11 +15,11 @@ function UserItem({ user, count }) {
       <th scope="row">{count}</th>
       <td>{person.surname}</td>
       <td>{person.name}</td>
-      <td>{person.email}</td>
-      <td>{person.telephoneNumber}</td>
-      <td>{company.name}</td>
-      <td>{company.position}</td>
-      <td>{account.lastLogon}</td>
+      <td>{person.email ? person.email : '-'}</td>
+      <td>{person.telephoneNumber ? person.telephoneNumber : '-'}</td>
+      <td>{company.name ? company.name : '-'}</td>
+      <td>{company.position ? company.position : '-'}</td>
+      <td>{account.lastLogon ? account.lastLogon : '-'}</td>
     </tr>
   );
 }
