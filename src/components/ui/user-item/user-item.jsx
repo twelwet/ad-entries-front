@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import userDataProps from '../../../prop-types/user-data.prop';
 
 function UserItem({ user, count }) {
@@ -19,7 +20,7 @@ function UserItem({ user, count }) {
       <td>{person.telephoneNumber ? person.telephoneNumber : '-'}</td>
       <td>{company.name ? company.name : '-'}</td>
       <td>{company.position ? company.position : '-'}</td>
-      <td>{account.lastLogon ? account.lastLogon : '-'}</td>
+      <td>{account.lastLogon ? moment(account.lastLogon).format('DD.MM.YYYY hh:mm') : '-'}</td>
     </tr>
   );
 }
