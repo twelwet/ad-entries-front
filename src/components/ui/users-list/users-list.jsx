@@ -4,7 +4,7 @@ import usersDataProps from '../../../prop-types/users-data.prop';
 import UserItem from '../user-item/user-item';
 import Spinner from '../spinner/spinner';
 import { connect } from 'react-redux';
-import { Status } from '../../../constants';
+import { Status, AppRoute } from '../../../constants';
 
 function UsersList({ status, users }) {
   if (status === Status.IDLE) {
@@ -39,8 +39,13 @@ function UsersList({ status, users }) {
     );
   }
 
-  if (status === Status.FULFILLED) {
-    return <h4 className="text-center mt-5">Что-то пошло не так.</h4>;
+  if (status === Status.REJECTED) {
+    return (
+      <div className="text-center mt-5">
+        <h4>Что-то пошло не так.</h4>
+        <a href={AppRoute.SEARCH}>Обновить страницу</a>
+      </div>
+    );
   }
 }
 
