@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchUsersByQuery } from '../../../store/api-actions';
 
 function SearchBlock({ field, getUsersByQuery }) {
   const [text, setText] = useState('');
+  const searchRef = useRef();
+
+  useEffect(() => {
+    searchRef.current.focus();
+  }, []);
 
   const handleText = (evt) => {
     const {value} = evt.target;
@@ -24,6 +29,7 @@ function SearchBlock({ field, getUsersByQuery }) {
       className="m-5"
     >
       <input
+        ref={searchRef}
         className="form-control p-2"
         type="text"
         placeholder={'Введите текст и нажмите Enter'}
