@@ -34,6 +34,7 @@ function UserItem({ user, count }) {
         <td id={objectInfo.dn} colSpan="7" className={detailsFlag ? 'collapse show' : 'collapse'}>
           <p>Аккаунт: <b>{account.name}</b>, создан: <b>{account.whenCreated ? moment(account.whenCreated).format('DD.MM.YYYY HH:mm') : '-'}</b></p>
           <p>Последний вход: <b>{account.lastLogon ? moment(account.lastLogon).format('DD.MM.YYYY HH:mm') : '-'}</b></p>
+          <p>Доменная запись: <b>{objectInfo.dn}</b></p>
         </td>
       </tr>
     </>
