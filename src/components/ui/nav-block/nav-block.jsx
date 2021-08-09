@@ -5,9 +5,6 @@ import { SearchField } from '../../../constants';
 import {changeSearchField} from '../../../store/action';
 
 const userSearchTab = [{
-  name: 'Никнейм',
-  searchField: SearchField.User.NICK_NAME,
-}, {
   name: 'ФИО',
   searchField: SearchField.User.NAME,
 }, {
@@ -16,6 +13,9 @@ const userSearchTab = [{
 }, {
   name: 'Организация',
   searchField: SearchField.User.COMPANY,
+}, {
+  name: 'Никнейм',
+  searchField: SearchField.User.NICK_NAME,
 }];
 
 function NavBlock({ field, onTabClick }) {
