@@ -13,8 +13,8 @@ function UserItem({ user, count }) {
   return (
     <tr>
       <th scope="row">{count}</th>
-      <td>{person.surname}</td>
-      <td>{person.name}</td>
+      <td>{person.surname ? person.surname : '-'}</td>
+      <td>{person.name ? person.name : '-'}</td>
       <td>{person.email ? person.email : '-'}</td>
       <td>{person.telephoneNumber ? person.telephoneNumber : '-'}</td>
       <td>{company.name ? company.name : '-'}</td>
