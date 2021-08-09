@@ -7,7 +7,7 @@ function UserItem({ user, count }) {
     // objectInfo,
     person,
     company,
-    // account,
+    account,
   } = user;
 
   return (
@@ -19,6 +19,7 @@ function UserItem({ user, count }) {
       <td>{person.telephoneNumber}</td>
       <td>{company.name}</td>
       <td>{company.position}</td>
+      <td>{account.lastLogon}</td>
     </tr>
   );
 }
