@@ -5,8 +5,8 @@ import { SearchField } from '../../../constants';
 import {changeSearchField} from '../../../store/action';
 
 const userSearchTab = [{
-  name: 'ФИО',
-  searchField: SearchField.User.NAME,
+  name: 'Полное имя',
+  searchField: SearchField.User.FULL_NAME,
 }, {
   name: 'Телефон',
   searchField: SearchField.User.TEL,

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import userDataProps from '../../../prop-types/user-data.prop';
+import {getName} from '../../../utils/get-name';
 
 function UserItem({ user, count }) {
   const [detailsFlag, setDetailsFlag] = useState(false);
@@ -23,8 +24,7 @@ function UserItem({ user, count }) {
         data-bs-target={`#${objectInfo.dn}`}
       >
         <th scope="row">{count}</th>
-        <td>{person.surname ? person.surname : '-'}</td>
-        <td>{person.name ? person.name : '-'}</td>
+        <td>{getName(person)}</td>
         <td>{person.email ? person.email : '-'}</td>
         <td>{person.telephoneNumber ? person.telephoneNumber : '-'}</td>
         <td>{company.name ? company.name : '-'}</td>

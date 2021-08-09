@@ -27,8 +27,7 @@ function UsersList({ status, users }) {
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Фамилия</th>
-              <th scope="col">Имя</th>
+              <th scope="col">Полное имя</th>
               <th scope="col">Email</th>
               <th scope="col">Телефон</th>
               <th scope="col">Организация</th>

@@ -11,7 +11,7 @@ const HttpCode = {
 const SearchField = {
   User: {
     NICK_NAME: 'sAMAccountName',
-    NAME: 'cn',
+    FULL_NAME: 'cn',
     TEL: 'telephoneNumber',
     COMPANY: 'company',
   },
@@ -46,6 +46,6 @@ const ErrorInfoMessage = {
 
 const BACKEND_URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}`;
 
-const REQUEST_TIMEOUT = 10000;
+const REQUEST_TIMEOUT = 15000;
 
 export { HttpCode, APIRoute, AppRoute, Status, ErrorInfoMessage, BACKEND_URL, REQUEST_TIMEOUT, SearchField };

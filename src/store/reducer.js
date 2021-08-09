@@ -3,7 +3,7 @@ import { Status, SearchField } from '../constants';
 
 const initialState = {
   searchUsers: {
-    field: SearchField.User.NAME,
+    field: SearchField.User.FULL_NAME,
     status: Status.IDLE,
     data: [],
     error: { message: null },
