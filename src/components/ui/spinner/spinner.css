@@ -12,7 +12,7 @@
   height: 100px;
   border-radius: 50%;
   border: 20px solid rgba(255, 255, 255, 0.1);
-  border-top-color: #4481c3;
+  border-top-color: #fe7e14;
   animation: spin 1s linear infinite;
 }
 
