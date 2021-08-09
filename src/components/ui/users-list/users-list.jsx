@@ -33,7 +33,6 @@ function UsersList({ status, users }) {
               <th scope="col">Телефон</th>
               <th scope="col">Организация</th>
               <th scope="col">Должность</th>
-              <th scope="col">Активность</th>
             </tr>
           </thead>
           <tbody>
