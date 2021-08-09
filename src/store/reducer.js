@@ -1,10 +1,13 @@
 import { ActionType } from './action';
-import { Status } from '../constants';
+import { Status, SearchField } from '../constants';
 
 const initialState = {
-  status: Status.IDLE,
-  data: [],
-  error: { message: null },
+  searchUsers: {
+    field: SearchField.User.NICK_NAME,
+    status: Status.IDLE,
+    data: [],
+    error: { message: null },
+  },
 };
 
 export const reducer = (state = initialState, action) => {
@@ -12,19 +15,30 @@ export const reducer = (state = initialState, action) => {
     case ActionType.LOAD_ENTRIES_PENDING:
       return {
         ...state,
-        status: Status.PENDING,
+        searchUsers: { ...state.searchUsers, status: Status.PENDING },
       };
     case ActionType.LOAD_ENTRIES_FULFILLED:
       return {
         ...state,
-        status: Status.FULFILLED,
-        data: action.payload,
+        searchUsers: {
+          ...state.searchUsers,
+          status: Status.FULFILLED,
+          data: action.payload,
+        },
       };
     case ActionType.LOAD_ENTRIES_REJECTED:
       return {
         ...state,
-        status: Status.REJECTED,
-        error: { message: action.payload },
+        searchUsers: {
+          ...state.searchUsers,
+          status: Status.REJECTED,
+          error: { message: action.payload },
+        },
+      };
+    case ActionType.CHANGE_SEARCH_FIELD:
+      return {
+        ...state,
+        searchUsers: { ...state.searchUsers, field: action.payload },
       };
     default:
       return state;

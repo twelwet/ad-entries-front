@@ -8,10 +8,24 @@ const HttpCode = {
   UNAUTHORIZED: 401,
 };
 
+const SearchField = {
+  User: {
+    NICK_NAME: 'sAMAccountName',
+    NAME: 'cn',
+    TEL: 'telephoneNumber',
+    COMPANY: 'company',
+  },
+};
+
 const APIRoute = {
   USERS: '/users',
   OUS: '/ous',
   GROUPS: '/groups',
+};
+
+const AppRoute = {
+  MAIN: '/',
+  SEARCH: '/search',
 };
 
 const Status = {
@@ -30,9 +44,8 @@ const ErrorInfoMessage = {
   REQUEST_PROBLEM: 'Something went wrong with request',
 };
 
-// const BACKEND_URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}`;
-const BACKEND_URL = 'http://localhost:8080';
+const BACKEND_URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}`;
 
-const REQUEST_TIMEOUT = 5000;
+const REQUEST_TIMEOUT = 10000;
 
-export { HttpCode, APIRoute, Status, ErrorInfoMessage, BACKEND_URL, REQUEST_TIMEOUT };
+export { HttpCode, APIRoute, AppRoute, Status, ErrorInfoMessage, BACKEND_URL, REQUEST_TIMEOUT, SearchField };
