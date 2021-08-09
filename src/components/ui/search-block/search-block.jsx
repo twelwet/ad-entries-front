@@ -23,17 +23,16 @@ function SearchBlock({ field, getUsersByQuery }) {
       onSubmit={handleSubmit}
       className="m-5"
     >
-      <div className="d-flex flex-row">
-        <input
-          className="form-control"
-          type="text"
-          placeholder={'Введите текст и нажмите Enter'}
-          minLength="3"
-          value={text}
-          onChange={handleText}
-          required
-        />
-      </div>
+      <input
+        className="form-control p-2"
+        type="text"
+        placeholder={'Введите текст и нажмите Enter'}
+        minLength="3"
+        value={text}
+        onChange={handleText}
+        required
+      />
+      <div className="text-secondary float-end">Поиск по полю: <b>{field}</b></div>
     </form>
   );
 }
