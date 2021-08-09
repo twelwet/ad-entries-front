@@ -17,13 +17,13 @@ export default PropTypes.shape({
     // position: PropTypes.string.isRequired,
     name: PropTypes.string,
   }),
-  // account: PropTypes.shape({
+  account: PropTypes.shape({
   //   name: PropTypes.string.isRequired,
   //   fullName: PropTypes.string.isRequired,
-  //   lastLogon: PropTypes.string.isRequired,
+    lastLogon: PropTypes.string,
   //   whenCreated: PropTypes.string.isRequired,
   //   whenChanged: PropTypes.string.isRequired,
   //   pwdLastSet: PropTypes.string.isRequired,
   //   logonCount: PropTypes.string.isRequired,
-  // }),
+  }),
 });

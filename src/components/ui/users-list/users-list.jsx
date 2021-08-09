@@ -16,6 +16,10 @@ function UsersList({ status, users }) {
   }
 
   if (status === Status.FULFILLED) {
+    if (users.length === 0) {
+      return <h4 className="text-center mt-5">Не нашлось ни одного сопадения, попробуйте еще раз.</h4>;
+    }
+
     return (
       <div>
         <h4 className="text-center mt-5">Найдено {users.length} совпадений</h4>
