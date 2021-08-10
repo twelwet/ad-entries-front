@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import userDataProps from '../../../prop-types/user-data.prop';
-import {getGroupList} from '../../../utils/get-group-list';
+import userDataProps from '../../../../prop-types/user-data.prop';
+import {getGroupList} from '../../../../utils/get-group-list';
 
-function UserItem({ user, count }) {
+function Entry({ data, count }) {
   const [detailsFlag, setDetailsFlag] = useState(false);
 
   const {
@@ -12,7 +12,7 @@ function UserItem({ user, count }) {
     person,
     company,
     account,
-  } = user;
+  } = data;
 
   const groups = getGroupList(objectInfo.memberOf);
 
@@ -33,7 +33,7 @@ function UserItem({ user, count }) {
         <td>{company.position ? company.position : '-'}</td>
       </tr>
       <tr className="bg-light">
-        <td id={objectInfo.dn} colSpan="7" className={detailsFlag ? 'collapse show' : 'collapse'}>
+        <td id={objectInfo.dn} colSpan="6" className={detailsFlag ? 'collapse show' : 'collapse'}>
           <div className="px-5">
             <p>Аккаунт: <b>{account.name}</b>, создан: <b>{account.whenCreated ? moment(account.whenCreated).format('DD.MM.YYYY HH:mm') : '-'}</b></p>
             <p>Последний вход: <b>{account.lastLogon ? moment(account.lastLogon).format('DD.MM.YYYY HH:mm') : '-'}</b></p>
@@ -47,9 +47,9 @@ function UserItem({ user, count }) {
   );
 }
 
-UserItem.propTypes = {
+Entry.propTypes = {
   count: PropTypes.number.isRequired,
-  user: userDataProps,
+  data: userDataProps,
 };
 
-export default UserItem;
+export default Entry;

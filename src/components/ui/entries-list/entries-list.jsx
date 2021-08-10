@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import usersDataProps from '../../../prop-types/users-data.prop';
-import UserItem from '../user-item/user-item';
+import ListHead from './list-head/list-head';
+import Entry from './entry/entry';
 import Spinner from '../spinner/spinner';
 import { connect } from 'react-redux';
 import { Status, AppRoute } from '../../../constants';
 
-function UsersList({ status, users }) {
+function EntriesList({ status, data }) {
   if (status === Status.IDLE) {
     return <h5 className="text-center mt-5">Начните поиск, здесь будут результаты.</h5>;
   }
@@ -16,26 +17,17 @@ function UsersList({ status, users }) {
   }
 
   if (status === Status.FULFILLED) {
-    if (users.length === 0) {
+    if (data.length === 0) {
       return <h5 className="text-center mt-5">Не нашлось ни одного сопадения.</h5>;
     }
 
     return (
       <div>
-        <h5 className="text-center mt-5">Найдено совпадений: {users.length}</h5>
+        <h5 className="text-center mt-5">Найдено совпадений: {data.length}</h5>
         <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Полное имя</th>
-              <th scope="col">Email</th>
-              <th scope="col">Телефон</th>
-              <th scope="col">Организация</th>
-              <th scope="col">Должность</th>
-            </tr>
-          </thead>
+          <ListHead />
           <tbody>
-            {users.map((user, index) => <UserItem key={user.objectInfo.dn} user={user} count={index + 1}/>)}
+            {data.map((entry, index) => <Entry key={entry.objectInfo.dn} data={entry} count={index + 1}/>)}
           </tbody>
         </table>
       </div>
@@ -52,15 +44,15 @@ function UsersList({ status, users }) {
   }
 }
 
-UsersList.propTypes = {
+EntriesList.propTypes = {
   status: PropTypes.string.isRequired,
-  users: usersDataProps,
+  data: usersDataProps,
 };
 
 const mapStateToProps = (state) => ({
   status: state.entries.status,
-  users: state.entries.data,
+  data: state.entries.data,
 });
 
-export {UsersList};
-export default connect(mapStateToProps, null)(UsersList);
+export {EntriesList};
+export default connect(mapStateToProps, null)(EntriesList);
