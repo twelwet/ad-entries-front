@@ -5,6 +5,7 @@ export const ActionType = {
   LOAD_ENTRIES_FULFILLED: `api/load-entries_${Status.FULFILLED}`,
   LOAD_ENTRIES_REJECTED: `api/load-entries_${Status.REJECTED}`,
   CHANGE_SEARCH_FIELD: 'app/change-search-field',
+  CHANGE_ENTRIES_TYPE: 'app/change-entries-type',
 };
 
 export const loadEntriesPending = () => ({
@@ -24,4 +25,9 @@ export const loadEntriesRejected = (errorMessage) => ({
 export const changeSearchField = (fieldName) => ({
   type: ActionType.CHANGE_SEARCH_FIELD,
   payload: fieldName,
+});
+
+export const changeEntriesType = (type) => ({
+  type: ActionType.CHANGE_ENTRIES_TYPE,
+  payload: type,
 });

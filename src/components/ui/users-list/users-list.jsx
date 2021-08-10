@@ -58,8 +58,8 @@ UsersList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  status: state.searchUsers.status,
-  users: state.searchUsers.data,
+  status: state.entries.status,
+  users: state.entries.data,
 });
 
 export {UsersList};

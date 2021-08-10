@@ -49,7 +49,7 @@ SearchBlock.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  field: state.searchUsers.field,
+  field: state.entries.field,
 });
 
 const mapDispatchToProps = (dispatch) => ({
