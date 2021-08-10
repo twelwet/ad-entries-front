@@ -6,16 +6,16 @@ import {changeSearchField} from '../../../store/action';
 
 const userSearchTab = [{
   name: 'Полное имя',
-  searchField: SearchField.User.FULL_NAME,
+  searchField: SearchField.User.DISPLAY_NAME,
+}, {
+  name: 'Аккаунт',
+  searchField: SearchField.User.ACCOUNT_NAME,
 }, {
   name: 'Телефон',
   searchField: SearchField.User.TEL,
 }, {
   name: 'Организация',
   searchField: SearchField.User.COMPANY,
-}, {
-  name: 'Никнейм',
-  searchField: SearchField.User.NICK_NAME,
 }];
 
 function SearchNav({ field, onTabClick }) {

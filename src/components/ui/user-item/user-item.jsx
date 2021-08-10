@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import userDataProps from '../../../prop-types/user-data.prop';
+import {getGroupList} from '../../../utils/get-group-list';
 
 function UserItem({ user, count }) {
   const [detailsFlag, setDetailsFlag] = useState(false);
@@ -12,6 +13,8 @@ function UserItem({ user, count }) {
     company,
     account,
   } = user;
+
+  const groups = getGroupList(objectInfo.memberOf);
 
   return (
     <>
@@ -31,9 +34,13 @@ function UserItem({ user, count }) {
       </tr>
       <tr className="bg-light">
         <td id={objectInfo.dn} colSpan="7" className={detailsFlag ? 'collapse show' : 'collapse'}>
-          <p>Аккаунт: <b>{account.name}</b>, создан: <b>{account.whenCreated ? moment(account.whenCreated).format('DD.MM.YYYY HH:mm') : '-'}</b></p>
-          <p>Последний вход: <b>{account.lastLogon ? moment(account.lastLogon).format('DD.MM.YYYY HH:mm') : '-'}</b></p>
-          <p>Доменная запись: <b>{objectInfo.dn}</b></p>
+          <div className="px-5">
+            <p>Аккаунт: <b>{account.name}</b>, создан: <b>{account.whenCreated ? moment(account.whenCreated).format('DD.MM.YYYY HH:mm') : '-'}</b></p>
+            <p>Последний вход: <b>{account.lastLogon ? moment(account.lastLogon).format('DD.MM.YYYY HH:mm') : '-'}</b></p>
+            <p>Доменная запись: <b>{objectInfo.dn}</b></p>
+            <p>Состоит в группах:</p>
+            <ol>{groups.map((groupName) => <b key={groupName}><li>{groupName}</li></b>)}</ol>
+          </div>
         </td>
       </tr>
     </>

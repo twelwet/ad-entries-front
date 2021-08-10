@@ -8,7 +8,7 @@ import { Status, AppRoute } from '../../../constants';
 
 function UsersList({ status, users }) {
   if (status === Status.IDLE) {
-    return <h4 className="text-center mt-5">Начните поиск</h4>;
+    return <h5 className="text-center mt-5">Начните поиск, здесь будут результаты.</h5>;
   }
 
   if (status === Status.PENDING) {
@@ -17,12 +17,12 @@ function UsersList({ status, users }) {
 
   if (status === Status.FULFILLED) {
     if (users.length === 0) {
-      return <h4 className="text-center mt-5">Не нашлось ни одного сопадения.</h4>;
+      return <h5 className="text-center mt-5">Не нашлось ни одного сопадения.</h5>;
     }
 
     return (
       <div>
-        <h4 className="text-center mt-5">Найдено совпадений: {users.length}</h4>
+        <h5 className="text-center mt-5">Найдено совпадений: {users.length}</h5>
         <table className="table">
           <thead>
             <tr>

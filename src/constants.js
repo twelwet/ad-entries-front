@@ -10,7 +10,7 @@ const HttpCode = {
 
 const SearchField = {
   User: {
-    NICK_NAME: 'sAMAccountName',
+    ACCOUNT_NAME: 'sAMAccountName',
     DISPLAY_NAME: 'displayName',
     TEL: 'telephoneNumber',
     COMPANY: 'company',
