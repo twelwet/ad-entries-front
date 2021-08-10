@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchUsersByQuery } from '../../../store/api-actions';
+import { fetchEntriesByQuery } from '../../../store/api-actions';
 
-function SearchBlock({ field, getUsersByQuery }) {
+function SearchBlock({ type, field, getEntriesByQuery }) {
   const [text, setText] = useState('');
   const searchRef = useRef();
 
@@ -18,7 +18,7 @@ function SearchBlock({ field, getUsersByQuery }) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    getUsersByQuery(field, text);
+    getEntriesByQuery(type, field, text);
   };
 
   return (
@@ -38,23 +38,25 @@ function SearchBlock({ field, getUsersByQuery }) {
         onChange={handleText}
         required
       />
-      <div className="text-secondary float-end">Поиск по полю: <b>{field}</b></div>
+      <div className="text-secondary float-end">Поиск записей <b>{type}</b> по атрибуту <b>{field}</b></div>
     </form>
   );
 }
 
 SearchBlock.propTypes = {
+  type: PropTypes.string.isRequired,
   field: PropTypes.string.isRequired,
-  getUsersByQuery: PropTypes.func.isRequired,
+  getEntriesByQuery: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  type: state.entries.type,
   field: state.entries.field,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getUsersByQuery (field, query) {
-    dispatch(fetchUsersByQuery(field, query));
+  getEntriesByQuery (type, field, query) {
+    dispatch(fetchEntriesByQuery(type, field, query));
   },
 });
 

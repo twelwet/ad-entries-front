@@ -1,10 +1,11 @@
 import { ActionType } from './action';
-import { Status, SearchField, APIRoute } from '../constants';
+import { Status, SearchTab, Type } from '../constants';
 
 const initialState = {
   entries: {
-    type: APIRoute.USERS,
-    field: SearchField.User.DISPLAY_NAME,
+    type: Type.USER,
+    searchTabs: SearchTab[Type.USER],
+    field: SearchTab[Type.USER][0].FIELD,
     status: Status.IDLE,
     data: [],
     error: { message: null },
@@ -44,7 +45,14 @@ export const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_ENTRIES_TYPE:
       return {
         ...state,
-        entries: { ...state.entries, type: action.payload },
+        entries: {
+          ...state.entries,
+          type: action.payload,
+          searchTabs: SearchTab[action.payload],
+          field:SearchTab[action.payload][0].FIELD,
+          status: Status.IDLE,
+          data: [],
+        },
       };
     default:
       return state;

@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { AppRoute, APIRoute } from '../../../constants';
-import {changeEntriesType} from '../../../store/action';
+import { AppRoute, Type } from '../../../constants';
+import { changeEntriesType } from '../../../store/action';
 
 const navItems = [{
   name: 'Пользователи',
-  type: APIRoute.USERS,
+  type: Type.USER,
 }, {
   name: 'Группы',
-  type: APIRoute.GROUPS,
+  type: Type.GROUP,
 }, {
   name: 'Юниты',
-  type: APIRoute.OUS,
+  type: Type.OU,
 }];
 
 function MainNav({ type, onTabClick }) {

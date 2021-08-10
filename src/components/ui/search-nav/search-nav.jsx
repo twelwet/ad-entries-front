@@ -1,40 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { SearchField } from '../../../constants';
-import {changeSearchField} from '../../../store/action';
+import { changeSearchField } from '../../../store/action';
 
-const userSearchTab = [{
-  name: 'Полное имя',
-  searchField: SearchField.User.DISPLAY_NAME,
-}, {
-  name: 'Аккаунт',
-  searchField: SearchField.User.ACCOUNT_NAME,
-}, {
-  name: 'Телефон',
-  searchField: SearchField.User.TEL,
-}, {
-  name: 'Организация',
-  searchField: SearchField.User.COMPANY,
-}];
-
-function SearchNav({ field, onTabClick }) {
+function SearchNav({ searchTabs, field, onTabClick }) {
   return (
     <ul className="nav nav-tabs">
       {
-        userSearchTab.map(
+        searchTabs.map(
           (item) => (
-            <li key={item.searchField} className="nav-item">
+            <li key={item.FIELD} className="nav-item">
               <button
                 onClick={(evt) => {
                   evt.preventDefault();
                   const {value} = evt.target;
                   onTabClick(value);
                 }}
-                className={item.searchField === field ? 'nav-link active' : 'nav-link'}
-                value={item.searchField}
+                className={item.FIELD === field ? 'nav-link active' : 'nav-link'}
+                value={item.FIELD}
               >
-                {item.name}
+                {item.NAME}
               </button>
             </li>
           ),
@@ -45,11 +30,16 @@ function SearchNav({ field, onTabClick }) {
 }
 
 SearchNav.propTypes = {
+  searchTabs: PropTypes.arrayOf(PropTypes.shape({
+    NAME: PropTypes.string.isRequired,
+    FIELD: PropTypes.string.isRequired,
+  })),
   field: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  searchTabs: state.entries.searchTabs,
   field: state.entries.field,
 });
 

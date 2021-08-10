@@ -8,19 +8,55 @@ const HttpCode = {
   UNAUTHORIZED: 401,
 };
 
+const Type = {
+  USER: 'User',
+  GROUP: 'Group',
+  OU: 'Ou',
+};
+
 const SearchField = {
-  User: {
+  [Type.USER]: {
     ACCOUNT_NAME: 'sAMAccountName',
     DISPLAY_NAME: 'displayName',
     TEL: 'telephoneNumber',
     COMPANY: 'company',
   },
+  [Type.GROUP]: {
+    NAME: 'cn',
+  },
+  [Type.OU]: {
+    NAME: 'ou',
+  },
+};
+
+const SearchTab = {
+  [Type.USER]: [{
+    NAME: 'Полное имя',
+    FIELD: SearchField.User.DISPLAY_NAME,
+  }, {
+    NAME: 'Аккаунт',
+    FIELD: SearchField.User.ACCOUNT_NAME,
+  }, {
+    NAME: 'Телефон',
+    FIELD: SearchField.User.TEL,
+  }, {
+    NAME: 'Организация',
+    FIELD: SearchField.User.COMPANY,
+  }],
+  [Type.GROUP]: [{
+    NAME: 'Название группы',
+    FIELD: SearchField.Group.NAME,
+  }],
+  [Type.OU]: [{
+    NAME: 'Название юнита',
+    FIELD: SearchField.Ou.NAME,
+  }],
 };
 
 const APIRoute = {
-  USERS: '/users',
-  OUS: '/ous',
-  GROUPS: '/groups',
+  [Type.USER]: '/users',
+  [Type.OU]: '/ous',
+  [Type.GROUP]: '/groups',
 };
 
 const AppRoute = {
@@ -48,4 +84,4 @@ const BACKEND_URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT
 
 const REQUEST_TIMEOUT = 15000;
 
-export { HttpCode, APIRoute, AppRoute, Status, ErrorInfoMessage, BACKEND_URL, REQUEST_TIMEOUT, SearchField };
+export { HttpCode, Type, APIRoute, AppRoute, Status, ErrorInfoMessage, BACKEND_URL, REQUEST_TIMEOUT, SearchTab };

@@ -7,9 +7,9 @@ import {
 import { APIRoute } from '../constants';
 import { handleAPIError } from '../utils/handle-api-error';
 
-export const fetchUsersByQuery = (field, query) => (dispatch, _getState, api) => {
+export const fetchEntriesByQuery = (type, field, query) => (dispatch, _getState, api) => {
   dispatch(loadEntriesPending());
-  return api.get(`${APIRoute.USERS}/${field}/${query}`)
+  return api.get(`${APIRoute[type]}/${field}/${query}`)
     .then(({data}) => dispatch(loadEntriesFulfilled(data)))
     .catch((error) => handleAPIError(error, dispatch, loadEntriesRejected));
 };
