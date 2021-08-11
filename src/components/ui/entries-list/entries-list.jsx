@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import usersDataProps from '../../../prop-types/users-data.prop';
+import entriesDataProp from '../../../prop-types/entries-data.prop';
 import ListHead from './list-head/list-head';
 import Entry from './entry/entry';
 import Spinner from '../spinner/spinner';
@@ -46,7 +46,7 @@ function EntriesList({ status, data }) {
 
 EntriesList.propTypes = {
   status: PropTypes.string.isRequired,
-  data: usersDataProps,
+  data: entriesDataProp,
 };
 
 const mapStateToProps = (state) => ({

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import userDataProps from '../../../../prop-types/user-data.prop';
+import entryDataProp from '../../../../prop-types/entry-data.prop';
 import { DataAdapter } from '../../../../data-adapter';
 import { MOCK } from '../../../../constants';
 
@@ -19,7 +19,7 @@ function Entry({ type, data, count }) {
 Entry.propTypes = {
   type: PropTypes.string.isRequired,
   count: PropTypes.number.isRequired,
-  data: userDataProps,
+  data: entryDataProp,
 };
 
 const mapStateToProps = (state) => ({
