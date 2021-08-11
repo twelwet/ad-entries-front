@@ -14,6 +14,7 @@ export default PropTypes.shape({
       displayName: PropTypes.string,
       email: PropTypes.string,
       emailBoxSize: PropTypes.string,
+      emailQuota: PropTypes.string,
       telephoneNumber: PropTypes.string,
       whenEmailCreated: PropTypes.string,
     }),

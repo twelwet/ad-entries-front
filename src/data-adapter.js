@@ -2,17 +2,19 @@ import { Type } from './constants';
 import moment from 'moment';
 
 const getBoxSize = (bytes) => (bytes / 1024 / 1024 / 1024).toFixed(2);
+const getQuotaSize = (kBytes) => (kBytes / 1024 / 1024).toFixed(2);
 
 const getUserAdapter = (userFromAPI) => {
   const { user } = userFromAPI;
   const { person, company, account } = user;
-  const { displayName, email, emailBoxSize, whenEmailCreated } = person;
+  const { displayName, email, emailBoxSize, emailQuota, whenEmailCreated } = person;
   const { name } = company;
   const { lastLogon } = account;
   return [
     displayName ? displayName : null,
     email ? email : null,
     emailBoxSize ? getBoxSize(emailBoxSize) : null,
+    emailQuota ? getQuotaSize(emailQuota) : null,
     whenEmailCreated ? moment(whenEmailCreated).format('DD.MM.YYYY, HH:mm') : null,
     lastLogon ? moment(lastLogon).format('DD.MM.YYYY, HH:mm') : null,
     name ? name : null,
