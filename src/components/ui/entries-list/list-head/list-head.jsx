@@ -1,18 +1,28 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { TableHead } from '../../../../constants';
+import PropTypes from 'prop-types';
 
-function ListHead() {
+function ListHead({ type }) {
   return (
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Полное имя</th>
-        <th scope="col">Email</th>
-        <th scope="col">Телефон</th>
-        <th scope="col">Организация</th>
-        <th scope="col">Должность</th>
+        {
+          TableHead[type].map(
+            (item) => <th key={item} scope="col">{item}</th>,
+          )
+        }
       </tr>
     </thead>
   );
 }
 
-export default ListHead;
+ListHead.propTypes = {
+  type: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  type: state.entries.type,
+});
+
+export default connect(mapStateToProps, null)(ListHead);

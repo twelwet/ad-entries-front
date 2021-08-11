@@ -25,7 +25,7 @@ const SearchField = {
     NAME: 'cn',
   },
   [Type.OU]: {
-    NAME: 'ou',
+    NAME: 'description',
   },
 };
 
@@ -48,7 +48,7 @@ const SearchTab = {
     FIELD: SearchField.Group.NAME,
   }],
   [Type.OU]: [{
-    NAME: 'Название юнита',
+    NAME: 'Описание юнита',
     FIELD: SearchField.Ou.NAME,
   }],
 };
@@ -57,6 +57,12 @@ const APIRoute = {
   [Type.USER]: '/users',
   [Type.OU]: '/ous',
   [Type.GROUP]: '/groups',
+};
+
+const TableHead = {
+  [Type.USER]: ['#', 'Полное имя', 'Email', 'Gb', 'Создан', 'Заходил', 'Организация'],
+  [Type.GROUP]: ['#', 'Название', 'Описание', 'Создан', 'Кол-во участников'],
+  [Type.OU]: ['#', 'Название', 'Описание', 'Создан', 'Город', 'Улица'],
 };
 
 const AppRoute = {
@@ -84,4 +90,6 @@ const BACKEND_URL = `http://${process.env.REACT_APP_API_URL}:${process.env.REACT
 
 const REQUEST_TIMEOUT = 15000;
 
-export { HttpCode, Type, APIRoute, AppRoute, Status, ErrorInfoMessage, BACKEND_URL, REQUEST_TIMEOUT, SearchTab };
+const MOCK = '-';
+
+export { HttpCode, Type, APIRoute, AppRoute, Status, ErrorInfoMessage, BACKEND_URL, REQUEST_TIMEOUT, SearchTab, TableHead, MOCK };
