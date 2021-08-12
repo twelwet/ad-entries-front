@@ -26,34 +26,38 @@ const SearchField = {
     DESCRIPTION: 'description',
   },
   [Type.OU]: {
-    NAME: 'description',
+    NAME: 'ou',
+    DESCRIPTION: 'description',
   },
 };
 
 const SearchTab = {
   [Type.USER]: [{
     NAME: 'Полное имя',
-    FIELD: SearchField.User.DISPLAY_NAME,
+    FIELD: SearchField[Type.USER].DISPLAY_NAME,
   }, {
     NAME: 'Аккаунт',
-    FIELD: SearchField.User.ACCOUNT_NAME,
+    FIELD: SearchField[Type.USER].ACCOUNT_NAME,
   }, {
     NAME: 'Телефон',
-    FIELD: SearchField.User.TEL,
+    FIELD: SearchField[Type.USER].TEL,
   }, {
     NAME: 'Организация',
-    FIELD: SearchField.User.COMPANY,
+    FIELD: SearchField[Type.USER].COMPANY,
   }],
   [Type.GROUP]: [{
-    NAME: 'Название',
-    FIELD: SearchField.Group.NAME,
+    NAME: 'Название группы',
+    FIELD: SearchField[Type.GROUP].NAME,
   }, {
-    NAME: 'Описание',
-    FIELD: SearchField.Group.DESCRIPTION,
+    NAME: 'Описание группы',
+    FIELD: SearchField[Type.GROUP].DESCRIPTION,
   }],
   [Type.OU]: [{
+    NAME: 'Название юнита',
+    FIELD: SearchField[Type.OU].NAME,
+  }, {
     NAME: 'Описание юнита',
-    FIELD: SearchField.Ou.NAME,
+    FIELD: SearchField[Type.OU].DESCRIPTION,
   }],
 };
 
