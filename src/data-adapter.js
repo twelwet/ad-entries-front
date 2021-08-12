@@ -77,7 +77,7 @@ const getUserServiceAdapter = (userFromAPI) => {
   ];
 };
 
-const getGroupAdapter = (groupFromAPI) => {
+const getGroupMainAdapter = (groupFromAPI) => {
   const { objectInfo, group } = groupFromAPI;
   const { whenCreated } = objectInfo;
   const { title, description, member: members } = group;
@@ -86,6 +86,17 @@ const getGroupAdapter = (groupFromAPI) => {
     description ? description : null,
     whenCreated ? moment(whenCreated).format('DD.MM.YYYY, HH:mm') : null,
     members ? [...members].length : null,
+  ];
+};
+
+const getGroupServiceAdapter = (groupFromAPI) => {
+  const { objectInfo, group } = groupFromAPI;
+  const { category, class: className } = objectInfo;
+  const { title } = group;
+  return [
+    title ? title : null,
+    className ? [...className].join(', ') : null,
+    category ? category : null,
   ];
 };
 
@@ -112,7 +123,8 @@ export const DataAdapter = {
     [DataAdapterName[Type.USER].SERVICE]: getUserServiceAdapter,
   },
   [Type.GROUP]: {
-    [DataAdapterName[Type.GROUP].MAIN]: getGroupAdapter,
+    [DataAdapterName[Type.GROUP].MAIN]: getGroupMainAdapter,
+    [DataAdapterName[Type.GROUP].SERVICE]: getGroupServiceAdapter,
   },
   [Type.OU]: {
     [DataAdapterName[Type.OU].MAIN]: getOuAdapter,

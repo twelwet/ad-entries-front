@@ -11,7 +11,9 @@ function Entry({ type, data, count, dataAdapterName }) {
   return (
     <tr>
       <th scope="row">{count}</th>
-      {entry.map((item, index) => <td key={`${item}-${index}`}>{item === null ? MOCK : item}</td>)}
+      {entry.map((item, index) =>
+        <td key={`${item}-${index}`}>{item === null ? MOCK : item}</td>,
+      )}
     </tr>
   );
 }

@@ -23,6 +23,7 @@ const SearchField = {
   },
   [Type.GROUP]: {
     NAME: 'cn',
+    DESCRIPTION: 'description',
   },
   [Type.OU]: {
     NAME: 'description',
@@ -44,8 +45,11 @@ const SearchTab = {
     FIELD: SearchField.User.COMPANY,
   }],
   [Type.GROUP]: [{
-    NAME: 'Название группы',
+    NAME: 'Название',
     FIELD: SearchField.Group.NAME,
+  }, {
+    NAME: 'Описание',
+    FIELD: SearchField.Group.DESCRIPTION,
   }],
   [Type.OU]: [{
     NAME: 'Описание юнита',
@@ -69,6 +73,7 @@ const DataAdapterName = {
   },
   [Type.GROUP]: {
     MAIN: 'main',
+    SERVICE: 'service',
   },
   [Type.OU]: {
     MAIN: 'main',
@@ -85,6 +90,7 @@ const TableHead = {
   },
   [Type.GROUP]: {
     [DataAdapterName[Type.GROUP].MAIN]: ['#', 'Название', 'Описание', 'Создан', 'Кол-во участников'],
+    [DataAdapterName[Type.GROUP].SERVICE]: ['#', 'Название', 'Класс', 'Категория'],
   },
   [Type.OU]: {
     [DataAdapterName[Type.OU].MAIN]: ['#', 'Название', 'Описание', 'Создан', 'Город', 'Улица'],
@@ -108,13 +114,18 @@ const EntriesTab = {
     name: 'Служебное',
     adapter: DataAdapterName[Type.USER].SERVICE,
   }],
+
   [Type.GROUP]: [{
     name: 'Основное',
-    adapter: DataAdapterName[Type.USER].MAIN,
+    adapter: DataAdapterName[Type.GROUP].MAIN,
+  }, {
+    name: 'Служебное',
+    adapter: DataAdapterName[Type.GROUP].SERVICE,
   }],
+
   [Type.OU]: [{
     name: 'Основное',
-    adapter: DataAdapterName[Type.USER].MAIN,
+    adapter: DataAdapterName[Type.OU].MAIN,
   }],
 };
 
