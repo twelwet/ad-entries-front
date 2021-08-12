@@ -64,6 +64,7 @@ const DataAdapterName = {
     MAIN: 'main',
     EMAIL_DETAILS: 'emailDetails',
     ACCOUNT: 'account',
+    LINKS: 'links',
     SERVICE: 'service',
   },
   [Type.GROUP]: {
@@ -79,7 +80,8 @@ const TableHead = {
     [DataAdapterName[Type.USER].MAIN]: ['#', 'Полное имя', 'Email', 'Телефон', 'Организация', 'Должность'],
     [DataAdapterName[Type.USER].EMAIL_DETAILS]: ['#', 'Полное имя', 'Email', 'Размер', 'Квота', 'Создан', 'Заходил', 'Организация'],
     [DataAdapterName[Type.USER].ACCOUNT]: ['#', 'Полное имя', 'Аккаунт', 'Входов', 'Последний вход', 'Создан', 'Менял пароль'],
-    [DataAdapterName[Type.USER].SERVICE]: ['#', 'Полное имя', 'Группы', 'Юниты'],
+    [DataAdapterName[Type.USER].LINKS]: ['#', 'Полное имя', 'Группы', 'Юниты'],
+    [DataAdapterName[Type.USER].SERVICE]: ['#', 'Полное имя', 'Класс', 'Категория'],
   },
   [Type.GROUP]: {
     [DataAdapterName[Type.GROUP].MAIN]: ['#', 'Название', 'Описание', 'Создан', 'Кол-во участников'],
@@ -101,6 +103,9 @@ const EntriesTab = {
     adapter: DataAdapterName[Type.USER].ACCOUNT,
   }, {
     name: 'Связи',
+    adapter: DataAdapterName[Type.USER].LINKS,
+  }, {
+    name: 'Служебное',
     adapter: DataAdapterName[Type.USER].SERVICE,
   }],
   [Type.GROUP]: [{

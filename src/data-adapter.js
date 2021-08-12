@@ -49,11 +49,11 @@ const getUserAccountAdapter = (userFromAPI) => {
     logonCount ? logonCount : null,
     lastLogon ? moment(lastLogon).format('DD.MM.YYYY, HH:mm') : null,
     whenCreated ? moment(whenCreated).format('DD.MM.YYYY, HH:mm') : null,
-    pwdLastSet ? moment(pwdLastSet).format('DD.MM.YYYY, HH:mm') : null,
+    (pwdLastSet && moment(pwdLastSet).valueOf() > 0) ? moment(pwdLastSet).format('DD.MM.YYYY, HH:mm') : null,
   ];
 };
 
-const getUserServiceAdapter = (userFromAPI) => {
+const getUserLinksAdapter = (userFromAPI) => {
   const { objectInfo, user } = userFromAPI;
   const { person } = user;
   const { displayName } = person;
@@ -62,6 +62,18 @@ const getUserServiceAdapter = (userFromAPI) => {
     displayName ? displayName : null,
     memberOf ? getGroups(memberOf) : null,
     dn ? getOusFromDn(dn) : null,
+  ];
+};
+
+const getUserServiceAdapter = (userFromAPI) => {
+  const { objectInfo, user } = userFromAPI;
+  const { person } = user;
+  const { displayName } = person;
+  const { category, class: className } = objectInfo;
+  return [
+    displayName ? displayName : null,
+    className ? [...className].join(', ') : null,
+    category ? category : null,
   ];
 };
 
@@ -96,6 +108,7 @@ export const DataAdapter = {
     [DataAdapterName[Type.USER].MAIN]: getUserMainAdapter,
     [DataAdapterName[Type.USER].EMAIL_DETAILS]: getUserEmailDetailsAdapter,
     [DataAdapterName[Type.USER].ACCOUNT]: getUserAccountAdapter,
+    [DataAdapterName[Type.USER].LINKS]: getUserLinksAdapter,
     [DataAdapterName[Type.USER].SERVICE]: getUserServiceAdapter,
   },
   [Type.GROUP]: {
