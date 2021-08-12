@@ -54,6 +54,7 @@ export const reducer = (state = initialState, action) => {
         entries: {
           ...state.entries,
           type: action.payload,
+          dataAdapterName: DataAdapterName[action.payload].MAIN,
           searchTabs: SearchTab[action.payload],
           field:SearchTab[action.payload][0].FIELD,
           status: Status.IDLE,
