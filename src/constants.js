@@ -59,10 +59,58 @@ const APIRoute = {
   [Type.GROUP]: '/groups',
 };
 
+const DataAdapterName = {
+  [Type.USER]: {
+    MAIN: 'main',
+    EMAIL_DETAILS: 'emailDetails',
+    ACCOUNT: 'account',
+    SERVICE: 'service',
+  },
+  [Type.GROUP]: {
+    MAIN: 'main',
+  },
+  [Type.OU]: {
+    MAIN: 'main',
+  },
+};
+
 const TableHead = {
-  [Type.USER]: ['#', 'Полное имя', 'Email', 'Размер', 'Квота', 'Создан', 'Заходил', 'Организация'],
-  [Type.GROUP]: ['#', 'Название', 'Описание', 'Создан', 'Кол-во участников'],
-  [Type.OU]: ['#', 'Название', 'Описание', 'Создан', 'Город', 'Улица'],
+  [Type.USER]: {
+    [DataAdapterName[Type.USER].MAIN]: ['#', 'Полное имя', 'Email', 'Телефон', 'Организация', 'Должность'],
+    [DataAdapterName[Type.USER].EMAIL_DETAILS]: ['#', 'Полное имя', 'Email', 'Размер', 'Квота', 'Создан', 'Заходил', 'Организация'],
+    [DataAdapterName[Type.USER].ACCOUNT]: ['#', 'Полное имя', 'Аккаунт', 'Входов', 'Последний вход', 'Создан', 'Менял пароль'],
+    [DataAdapterName[Type.USER].SERVICE]: ['#', 'Полное имя', 'Группы', 'Юниты'],
+  },
+  [Type.GROUP]: {
+    [DataAdapterName[Type.GROUP].MAIN]: ['#', 'Название', 'Описание', 'Создан', 'Кол-во участников'],
+  },
+  [Type.OU]: {
+    [DataAdapterName[Type.OU].MAIN]: ['#', 'Название', 'Описание', 'Создан', 'Город', 'Улица'],
+  },
+};
+
+const EntriesTab = {
+  [Type.USER]: [{
+    name:'Основное',
+    adapter: DataAdapterName[Type.USER].MAIN,
+  }, {
+    name: 'Почта: подробнее',
+    adapter: DataAdapterName[Type.USER].EMAIL_DETAILS,
+  }, {
+    name: 'Аккаунт',
+    adapter: DataAdapterName[Type.USER].ACCOUNT,
+  }, {
+    name: 'Связи',
+    adapter: DataAdapterName[Type.USER].SERVICE,
+  }],
+  [Type.GROUP]: [{
+    name: 'Основное',
+    adapter: DataAdapterName[Type.USER].MAIN,
+  }],
+  [Type.OU]: [{
+    name: 'Основное',
+    adapter: DataAdapterName[Type.USER].MAIN,
+  }],
 };
 
 const AppRoute = {
@@ -92,4 +140,18 @@ const REQUEST_TIMEOUT = 15000;
 
 const MOCK = '-';
 
-export { HttpCode, Type, APIRoute, AppRoute, Status, ErrorInfoMessage, BACKEND_URL, REQUEST_TIMEOUT, SearchTab, TableHead, MOCK };
+export {
+  HttpCode,
+  Type,
+  APIRoute,
+  AppRoute,
+  Status,
+  ErrorInfoMessage,
+  BACKEND_URL,
+  REQUEST_TIMEOUT,
+  SearchTab,
+  TableHead,
+  EntriesTab,
+  DataAdapterName,
+  MOCK
+};

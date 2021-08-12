@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { TableHead } from '../../../../constants';
 import PropTypes from 'prop-types';
 
-function ListHead({ type }) {
+function ListHead({ type, dataAdapterName }) {
   return (
     <thead>
       <tr>
         {
-          TableHead[type].map(
+          TableHead[type][dataAdapterName].map(
             (item) => <th key={item} scope="col">{item}</th>,
           )
         }
@@ -19,10 +19,12 @@ function ListHead({ type }) {
 
 ListHead.propTypes = {
   type: PropTypes.string.isRequired,
+  dataAdapterName: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   type: state.entries.type,
+  dataAdapterName: state.entries.dataAdapterName,
 });
 
 export default connect(mapStateToProps, null)(ListHead);

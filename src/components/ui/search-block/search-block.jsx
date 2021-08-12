@@ -41,7 +41,7 @@ function SearchBlock({ searchTabs, type, field, getEntriesByQuery, onRadioClick 
             (item) => (
               <div key={item.FIELD} className="form-check m-3">
                 <input
-                  onClick={searchFieldHandler}
+                  onChange={searchFieldHandler}
                   checked={item.FIELD === field}
                   className="form-check-input"
                   type="radio"

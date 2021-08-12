@@ -1,9 +1,10 @@
 import { ActionType } from './action';
-import { Status, SearchTab, Type } from '../constants';
+import { Status, SearchTab, Type, DataAdapterName } from '../constants';
 
 const initialState = {
   entries: {
     type: Type.USER,
+    dataAdapterName: DataAdapterName[Type.USER].MAIN,
     searchTabs: SearchTab[Type.USER],
     field: SearchTab[Type.USER][0].FIELD,
     status: Status.IDLE,
@@ -41,6 +42,11 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         entries: { ...state.entries, field: action.payload },
+      };
+    case ActionType.CHANGE_DATA_ADAPTER_NAME:
+      return {
+        ...state,
+        entries: { ...state.entries, dataAdapterName: action.payload },
       };
     case ActionType.CHANGE_ENTRIES_TYPE:
       return {

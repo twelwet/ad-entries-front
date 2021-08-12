@@ -5,9 +5,15 @@ import ListHead from './list-head/list-head';
 import Entry from './entry/entry';
 import Spinner from '../spinner/spinner';
 import { connect } from 'react-redux';
-import { Status, AppRoute } from '../../../constants';
+import { Status, AppRoute, EntriesTab } from '../../../constants';
+import { changeDataAdapterName } from '../../../store/action';
 
-function EntriesList({ status, data }) {
+function EntriesList({ type, status, data, dataAdapterName, onTabClick }) {
+  const changeTabHandler = (evt) => {
+    const {value} = evt.target;
+    onTabClick(value);
+  };
+
   if (status === Status.IDLE) {
     return <h5 className="text-center mt-5">Начните поиск, здесь будут результаты.</h5>;
   }
@@ -22,8 +28,21 @@ function EntriesList({ status, data }) {
     }
 
     return (
-      <div>
+      <div className="m-5">
         <h5 className="text-center mt-5">Найдено совпадений: {data.length}</h5>
+        <ul className="nav nav-tabs">
+          {EntriesTab[type].map((item, index) => (
+            <li key={item.name} className="nav-item">
+              <button
+                onClick={changeTabHandler}
+                value={item.adapter}
+                className={item.adapter === dataAdapterName ? 'nav-link active' : 'nav-link'}
+              >
+                {item.name}
+              </button>
+            </li>
+          ))}
+        </ul>
         <table className="table">
           <ListHead />
           <tbody>
@@ -45,14 +64,24 @@ function EntriesList({ status, data }) {
 }
 
 EntriesList.propTypes = {
+  type: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   data: entriesDataProp,
+  dataAdapterName: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  type: state.entries.type,
   status: state.entries.status,
   data: state.entries.data,
+  dataAdapterName: state.entries.dataAdapterName,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onTabClick: (dataAdapterName) => {
+    dispatch(changeDataAdapterName(dataAdapterName));
+  },
 });
 
 export {EntriesList};
-export default connect(mapStateToProps, null)(EntriesList);
+export default connect(mapStateToProps, mapDispatchToProps)(EntriesList);

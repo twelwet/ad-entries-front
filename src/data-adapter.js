@@ -1,10 +1,26 @@
-import { Type } from './constants';
+import { Type, DataAdapterName } from './constants';
 import moment from 'moment';
+import {getOusFromDn} from './utils/get-ous-from-dn';
+import {getGroups} from './utils/get-groups';
 
 const getBoxSize = (bytes) => (bytes / 1024 / 1024 / 1024).toFixed(2);
 const getQuotaSize = (kBytes) => (kBytes / 1024 / 1024).toFixed(2);
 
-const getUserAdapter = (userFromAPI) => {
+const getUserMainAdapter = (userFromAPI) => {
+  const { user } = userFromAPI;
+  const { person, company } = user;
+  const { displayName, email, telephoneNumber } = person;
+  const { name, position } = company;
+  return [
+    displayName ? displayName : null,
+    email ? email : null,
+    telephoneNumber ? telephoneNumber : null,
+    name ? name : null,
+    position ? position : null,
+  ];
+};
+
+const getUserEmailDetailsAdapter = (userFromAPI) => {
   const { user } = userFromAPI;
   const { person, company, account } = user;
   const { displayName, email, emailBoxSize, emailQuota, whenEmailCreated } = person;
@@ -18,6 +34,34 @@ const getUserAdapter = (userFromAPI) => {
     whenEmailCreated ? moment(whenEmailCreated).format('DD.MM.YYYY, HH:mm') : null,
     lastLogon ? moment(lastLogon).format('DD.MM.YYYY, HH:mm') : null,
     name ? name : null,
+  ];
+};
+
+const getUserAccountAdapter = (userFromAPI) => {
+  const { objectInfo, user } = userFromAPI;
+  const { person, account } = user;
+  const { displayName } = person;
+  const { name, lastLogon, logonCount, pwdLastSet } = account;
+  const { whenCreated } = objectInfo;
+  return [
+    displayName ? displayName : null,
+    name ? name : null,
+    logonCount ? logonCount : null,
+    lastLogon ? moment(lastLogon).format('DD.MM.YYYY, HH:mm') : null,
+    whenCreated ? moment(whenCreated).format('DD.MM.YYYY, HH:mm') : null,
+    pwdLastSet ? moment(pwdLastSet).format('DD.MM.YYYY, HH:mm') : null,
+  ];
+};
+
+const getUserServiceAdapter = (userFromAPI) => {
+  const { objectInfo, user } = userFromAPI;
+  const { person } = user;
+  const { displayName } = person;
+  const { dn, memberOf } = objectInfo;
+  return [
+    displayName ? displayName : null,
+    memberOf ? getGroups(memberOf) : null,
+    dn ? getOusFromDn(dn) : null,
   ];
 };
 
@@ -48,7 +92,16 @@ const getOuAdapter = (ouFromAPI) => {
 };
 
 export const DataAdapter = {
-  [Type.USER]: getUserAdapter,
-  [Type.GROUP]: getGroupAdapter,
-  [Type.OU]: getOuAdapter,
+  [Type.USER]: {
+    [DataAdapterName[Type.USER].MAIN]: getUserMainAdapter,
+    [DataAdapterName[Type.USER].EMAIL_DETAILS]: getUserEmailDetailsAdapter,
+    [DataAdapterName[Type.USER].ACCOUNT]: getUserAccountAdapter,
+    [DataAdapterName[Type.USER].SERVICE]: getUserServiceAdapter,
+  },
+  [Type.GROUP]: {
+    [DataAdapterName[Type.GROUP].MAIN]: getGroupAdapter,
+  },
+  [Type.OU]: {
+    [DataAdapterName[Type.OU].MAIN]: getOuAdapter,
+  },
 };

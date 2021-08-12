@@ -5,8 +5,8 @@ import entryDataProp from '../../../../prop-types/entry-data.prop';
 import { DataAdapter } from '../../../../data-adapter';
 import { MOCK } from '../../../../constants';
 
-function Entry({ type, data, count }) {
-  const entry = DataAdapter[type](data);
+function Entry({ type, data, count, dataAdapterName }) {
+  const entry = DataAdapter[type][dataAdapterName](data);
   /*eslint-disable react/no-array-index-key*/
   return (
     <tr>
@@ -20,10 +20,12 @@ Entry.propTypes = {
   type: PropTypes.string.isRequired,
   count: PropTypes.number.isRequired,
   data: entryDataProp,
+  dataAdapterName: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   type: state.entries.type,
+  dataAdapterName: state.entries.dataAdapterName,
 });
 
 export default connect(mapStateToProps, null)(Entry);
