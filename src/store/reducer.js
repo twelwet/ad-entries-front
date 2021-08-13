@@ -12,7 +12,7 @@ const initialState = {
     error: { message: null },
   },
   stat: {
-    type: Type.MAIN,
+    type: Type.ESSENTIAL,
     data: [],
     error: { message: null },
   },

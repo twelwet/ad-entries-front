@@ -12,8 +12,8 @@ const Type = {
   USER: 'User',
   GROUP: 'Group',
   OU: 'Ou',
-  MAIN: 'Main',
-  TOP_EMAIL_SIZE: 'Top Email Sizes',
+  ESSENTIAL: 'Essential',
+  TOP_BOXES: 'TopBoxes',
   DISABLED: 'Disabled',
 };
 
@@ -182,10 +182,10 @@ const NavTabs = {
   }],
   [AppRoute.STAT]: [{
     name: 'Основное',
-    type: Type.MAIN,
+    type: Type.ESSENTIAL,
   }, {
-    name: 'Топ размеров',
-    type: Type.TOP_EMAIL_SIZE,
+    name: 'Топ размеров ящиков',
+    type: Type.TOP_BOXES,
   }, {
     name: 'Отключенные',
     type: Type.DISABLED,
