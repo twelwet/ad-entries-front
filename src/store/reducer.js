@@ -11,6 +11,11 @@ const initialState = {
     data: [],
     error: { message: null },
   },
+  stat: {
+    type: Type.MAIN,
+    data: [],
+    error: { message: null },
+  },
 };
 
 export const reducer = (state = initialState, action) => {
@@ -59,6 +64,14 @@ export const reducer = (state = initialState, action) => {
           field:SearchTab[action.payload][0].FIELD,
           status: Status.IDLE,
           data: [],
+        },
+      };
+    case ActionType.CHANGE_STAT_TYPE:
+      return {
+        ...state,
+        stat: {
+          ...state.stat,
+          type: action.payload,
         },
       };
     default:

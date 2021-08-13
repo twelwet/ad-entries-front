@@ -7,6 +7,7 @@ export const ActionType = {
   CHANGE_SEARCH_FIELD: 'app/change-search-field',
   CHANGE_ENTRIES_TYPE: 'app/change-entries-type',
   CHANGE_DATA_ADAPTER_NAME: 'app/change-data-adapter-name',
+  CHANGE_STAT_TYPE: 'app/change-stat-type',
 };
 
 export const loadEntriesPending = () => ({
@@ -36,4 +37,9 @@ export const changeEntriesType = (type) => ({
 export const changeDataAdapterName = (adapterName) => ({
   type: ActionType.CHANGE_DATA_ADAPTER_NAME,
   payload: adapterName,
+});
+
+export const changeStatType = (type) => ({
+  type: ActionType.CHANGE_STAT_TYPE,
+  payload: type,
 });

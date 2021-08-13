@@ -1,12 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MainNav from '../ui/main-nav/main-nav';
+import MainTabs from '../ui/main-tabs/main-tabs';
 import SearchBlock from '../ui/search-block/search-block';
 import EntriesList from '../ui/entries-list/entries-list';
+import { changeEntriesType } from '../../store/action';
 
-function SearchPage() {
+function SearchPage({ page }) {
   return (
     <>
-      <MainNav />
+      <MainNav page={page} />
+      <MainTabs action={changeEntriesType} page={page} stateField={'entries'}/>
       <div className="m-2">
         <SearchBlock />
         <EntriesList />
@@ -14,5 +18,9 @@ function SearchPage() {
     </>
   );
 }
+
+SearchPage.propTypes = {
+  page: PropTypes.string.isRequired,
+};
 
 export default SearchPage;

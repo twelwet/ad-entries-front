@@ -12,6 +12,9 @@ const Type = {
   USER: 'User',
   GROUP: 'Group',
   OU: 'Ou',
+  MAIN: 'Main',
+  TOP_EMAIL_SIZE: 'Top Email Sizes',
+  DISABLED: 'Disabled',
 };
 
 const SearchField = {
@@ -141,6 +144,7 @@ const EntriesTab = {
 const AppRoute = {
   MAIN: '/',
   SEARCH: '/search',
+  STAT: '/stat',
 };
 
 const Status = {
@@ -165,6 +169,29 @@ const REQUEST_TIMEOUT = 15000;
 
 const MOCK = '-';
 
+const NavTabs = {
+  [AppRoute.SEARCH]: [{
+    name: 'Пользователи',
+    type: Type.USER,
+  }, {
+    name: 'Группы',
+    type: Type.GROUP,
+  }, {
+    name: 'Юниты',
+    type: Type.OU,
+  }],
+  [AppRoute.STAT]: [{
+    name: 'Основное',
+    type: Type.MAIN,
+  }, {
+    name: 'Топ размеров',
+    type: Type.TOP_EMAIL_SIZE,
+  }, {
+    name: 'Отключенные',
+    type: Type.DISABLED,
+  }],
+};
+
 export {
   HttpCode,
   Type,
@@ -178,5 +205,6 @@ export {
   TableHead,
   EntriesTab,
   DataAdapterName,
-  MOCK
+  MOCK,
+  NavTabs
 };

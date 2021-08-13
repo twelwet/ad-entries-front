@@ -1,44 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { AppRoute, Type } from '../../../constants';
-import { changeEntriesType } from '../../../store/action';
+import { AppRoute } from '../../../constants';
 
-const navItems = [{
-  name: 'Пользователи',
-  type: Type.USER,
-}, {
-  name: 'Группы',
-  type: Type.GROUP,
-}, {
-  name: 'Юниты',
-  type: Type.OU,
-}];
-
-function MainNav({ type, onTabClick }) {
+function MainNav({ page }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <a className="navbar-brand" href={AppRoute.SEARCH}>Каталог AD-записей</a>
-        <div className="navbar-nav">
-          {
-            navItems.map(
-              (item) => (
-                <button
-                  key={item.type}
-                  onClick={(evt) => {
-                    evt.preventDefault();
-                    const {value} = evt.target;
-                    onTabClick(value);
-                  }}
-                  className={item.type === type ? 'btn btn-link nav-link active' : 'btn btn-link nav-link'}
-                  value={item.type}
-                >
-                  {item.name}
-                </button>
-              ),
-            )
-          }
+        <a className="navbar-brand" href={AppRoute.MAIN}>Каталог AD-записей</a>
+        <div className="navbar-nav navbar-collapse">
+          <a className={page === AppRoute.SEARCH ? 'nav-link nav-item active' : 'nav-link nav-item'} href={AppRoute.SEARCH}>Поиск</a>
+          <a className={page === AppRoute.STAT ? 'nav-link nav-item active' : 'nav-link nav-item'} href={AppRoute.STAT}>Статистика</a>
         </div>
       </div>
     </nav>
@@ -46,18 +17,7 @@ function MainNav({ type, onTabClick }) {
 }
 
 MainNav.propTypes = {
-  type: PropTypes.string.isRequired,
-  onTabClick: PropTypes.func.isRequired,
+  page: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  type: state.entries.type,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onTabClick: (type) => {
-    dispatch(changeEntriesType(type));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainNav);
+export default MainNav;
