@@ -69,11 +69,11 @@ const getUserServiceAdapter = (userFromAPI) => {
   const { objectInfo, user } = userFromAPI;
   const { person } = user;
   const { displayName } = person;
-  const { category, class: className } = objectInfo;
+  const { dn, class: className } = objectInfo;
   return [
     displayName ? displayName : null,
     className ? [...className].join(', ') : null,
-    category ? category : null,
+    dn ? dn : null,
   ];
 };
 
@@ -91,16 +91,16 @@ const getGroupMainAdapter = (groupFromAPI) => {
 
 const getGroupServiceAdapter = (groupFromAPI) => {
   const { objectInfo, group } = groupFromAPI;
-  const { category, class: className } = objectInfo;
+  const { dn, class: className } = objectInfo;
   const { title } = group;
   return [
     title ? title : null,
     className ? [...className].join(', ') : null,
-    category ? category : null,
+    dn ? dn : null,
   ];
 };
 
-const getOuAdapter = (ouFromAPI) => {
+const getOuMainAdapter = (ouFromAPI) => {
   const { objectInfo, ou } = ouFromAPI;
   const { whenCreated } = objectInfo;
   const { title, description, location } = ou;
@@ -111,6 +111,17 @@ const getOuAdapter = (ouFromAPI) => {
     whenCreated ? moment(whenCreated).format('DD.MM.YYYY, HH:mm') : null,
     city ? city : null,
     street ? street : null,
+  ];
+};
+
+const getOuServiceAdapter = (ouFromAPI) => {
+  const { objectInfo, ou } = ouFromAPI;
+  const { dn, class: className } = objectInfo;
+  const { title } = ou;
+  return [
+    title ? title : null,
+    className ? [...className].join(', ') : null,
+    dn ? dn : null,
   ];
 };
 
@@ -127,6 +138,7 @@ export const DataAdapter = {
     [DataAdapterName[Type.GROUP].SERVICE]: getGroupServiceAdapter,
   },
   [Type.OU]: {
-    [DataAdapterName[Type.OU].MAIN]: getOuAdapter,
+    [DataAdapterName[Type.OU].MAIN]: getOuMainAdapter,
+    [DataAdapterName[Type.OU].SERVICE]: getOuServiceAdapter,
   },
 };

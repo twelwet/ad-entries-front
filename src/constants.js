@@ -81,6 +81,7 @@ const DataAdapterName = {
   },
   [Type.OU]: {
     MAIN: 'main',
+    SERVICE: 'service',
   },
 };
 
@@ -90,14 +91,15 @@ const TableHead = {
     [DataAdapterName[Type.USER].EMAIL_DETAILS]: ['#', 'Полное имя', 'Email', 'Размер', 'Квота', 'Создан', 'Заходил', 'Организация'],
     [DataAdapterName[Type.USER].ACCOUNT]: ['#', 'Полное имя', 'Аккаунт', 'Входов', 'Последний вход', 'Создан', 'Менял пароль'],
     [DataAdapterName[Type.USER].LINKS]: ['#', 'Полное имя', 'Группы', 'Юниты'],
-    [DataAdapterName[Type.USER].SERVICE]: ['#', 'Полное имя', 'Класс', 'Категория'],
+    [DataAdapterName[Type.USER].SERVICE]: ['#', 'Полное имя', 'Класс', 'Доменная запись'],
   },
   [Type.GROUP]: {
     [DataAdapterName[Type.GROUP].MAIN]: ['#', 'Название', 'Описание', 'Создан', 'Кол-во участников'],
-    [DataAdapterName[Type.GROUP].SERVICE]: ['#', 'Название', 'Класс', 'Категория'],
+    [DataAdapterName[Type.GROUP].SERVICE]: ['#', 'Название', 'Класс', 'Доменная запись'],
   },
   [Type.OU]: {
     [DataAdapterName[Type.OU].MAIN]: ['#', 'Название', 'Описание', 'Создан', 'Город', 'Улица'],
+    [DataAdapterName[Type.OU].SERVICE]: ['#', 'Название', 'Класс', 'Доменная запись'],
   },
 };
 
@@ -130,6 +132,9 @@ const EntriesTab = {
   [Type.OU]: [{
     name: 'Основное',
     adapter: DataAdapterName[Type.OU].MAIN,
+  }, {
+    name: 'Служебное',
+    adapter: DataAdapterName[Type.OU].SERVICE,
   }],
 };
 
