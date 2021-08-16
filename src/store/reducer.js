@@ -58,7 +58,7 @@ export const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_STAT_DATA_ADAPTER_SET:
       return {
         ...state,
-        stat: { ...state.stat, dataAdapterSet: action.payload },
+        stat: { ...state.stat, dataAdapterSetName: action.payload },
       };
     case ActionType.CHANGE_ENTRIES_TYPE:
       return {
@@ -79,7 +79,6 @@ export const reducer = (state = initialState, action) => {
         stat: {
           ...state.stat,
           type: action.payload,
-          dataAdapterName: DataAdapterName[action.payload].MAIN,
         },
       };
     case ActionType.LOAD_STAT_PENDING:
