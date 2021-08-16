@@ -11,7 +11,7 @@ import { fetchStat } from '../../store/api-actions';
 function StatPage({ type, page, getStat }) {
   useEffect(() => {
     getStat(type);
-  }, [getStat, type]);
+  }, []);
 
   return (
     <>
