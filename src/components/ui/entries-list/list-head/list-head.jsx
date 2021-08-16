@@ -22,9 +22,9 @@ ListHead.propTypes = {
   dataAdapterName: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  type: state.entries.type,
-  dataAdapterName: state.entries.dataAdapterName,
+const mapStateToProps = (state, { stateField }) => ({
+  type: state[stateField].type,
+  dataAdapterName: state[stateField].dataAdapterName,
 });
 
 export default connect(mapStateToProps, null)(ListHead);

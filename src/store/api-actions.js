@@ -1,7 +1,10 @@
 import {
   loadEntriesPending,
   loadEntriesFulfilled,
-  loadEntriesRejected
+  loadEntriesRejected,
+  loadStatPending,
+  loadStatFulfilled,
+  loadStatRejected
 } from './action';
 
 import { APIRoute } from '../constants';
@@ -12,4 +15,13 @@ export const fetchEntriesByQuery = (type, field, query) => (dispatch, _getState,
   return api.get(`${APIRoute[type]}/${field}/${query}`)
     .then(({data}) => dispatch(loadEntriesFulfilled(data)))
     .catch((error) => handleAPIError(error, dispatch, loadEntriesRejected));
+};
+
+export const fetchStat = (type) => (dispatch, _getState, api) => {
+  dispatch(loadStatPending());
+  /* eslint-disable no-console */
+  console.log(APIRoute[type]);
+  return api.get(APIRoute[type])
+    .then(({data}) => dispatch(loadStatFulfilled(data)))
+    .catch((error) => handleAPIError(error, dispatch, loadStatRejected));
 };

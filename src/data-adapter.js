@@ -125,6 +125,67 @@ const getOuServiceAdapter = (ouFromAPI) => {
   ];
 };
 
+const getAccountsMainAdapter = (dataFromAPI) => {
+  const { count } = dataFromAPI;
+  const { withEmails, all, enabled, disabled } = count;
+  return [
+    all ? all : null,
+    enabled ? enabled : null,
+    disabled ? disabled : null,
+    withEmails ? withEmails : null,
+  ];
+};
+
+const getCreationAdapter = (dataFromAPI) => {
+  const { count, creation } = dataFromAPI;
+  const year2021 = creation.find((item) => item.year2021).year2021;
+  const year2020 = creation.find((item) => item.year2020).year2020;
+  const year2019 = creation.find((item) => item.year2019).year2019;
+  const year2018 = creation.find((item) => item.year2018).year2018;
+  const year2017 = creation.find((item) => item.year2017).year2017;
+  const rest = count.all - (year2021 + year2020 + year2019 + year2018 + year2017);
+  return [
+    count.all ? count.all : null,
+    year2021 ? year2021 : null,
+    year2020 ? year2020 : null,
+    year2019 ? year2019 : null,
+    year2018 ? year2018 : null,
+    year2017 ? year2017 : null,
+    rest ? rest : null,
+  ];
+};
+
+const getAcivityAdapter = (dataFromAPI) => {
+  const { count, lastLogon } = dataFromAPI;
+  const year2021 = lastLogon.find((item) => item.year2021).year2021;
+  const year2020 = lastLogon.find((item) => item.year2020).year2020;
+  const year2019 = lastLogon.find((item) => item.year2019).year2019;
+  const year2018 = lastLogon.find((item) => item.year2018).year2018;
+  const year2017 = lastLogon.find((item) => item.year2017).year2017;
+  const never = lastLogon.find((item) => item.never).never;
+  const allActive = count.all - never;
+  return [
+    allActive ? allActive : null,
+    year2021 ? year2021 : null,
+    year2020 ? year2020 : null,
+    year2019 ? year2019 : null,
+    year2018 ? year2018 : null,
+    year2017 ? year2017 : null,
+    never ? never : null,
+  ];
+};
+
+const getEmailsMainAdapter = (dataFromAPI) => {
+  const { count } = dataFromAPI;
+  const { allBoxesSize, all, enabled, disabled } = count;
+  return [
+    all ? all : null,
+    enabled ? enabled : null,
+    disabled ? disabled : null,
+    allBoxesSize ? allBoxesSize : null,
+  ];
+};
+
 export const DataAdapter = {
   [Type.USER]: {
     [DataAdapterName[Type.USER].MAIN]: getUserMainAdapter,
@@ -140,5 +201,15 @@ export const DataAdapter = {
   [Type.OU]: {
     [DataAdapterName[Type.OU].MAIN]: getOuMainAdapter,
     [DataAdapterName[Type.OU].SERVICE]: getOuServiceAdapter,
+  },
+  [Type.ACCOUNTS]: {
+    [DataAdapterName[Type.ACCOUNTS].MAIN]: getAccountsMainAdapter,
+    [DataAdapterName[Type.ACCOUNTS].CREATION]: getCreationAdapter,
+    [DataAdapterName[Type.ACCOUNTS].ACTIVITY]: getAcivityAdapter,
+  },
+  [Type.EMAILS]: {
+    [DataAdapterName[Type.EMAILS].MAIN]: getEmailsMainAdapter,
+    [DataAdapterName[Type.EMAILS].CREATION]: getCreationAdapter,
+    [DataAdapterName[Type.EMAILS].ACTIVITY]: getAcivityAdapter,
   },
 };

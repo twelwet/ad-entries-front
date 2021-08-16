@@ -6,7 +6,7 @@ import Entry from './entry/entry';
 import Spinner from '../spinner/spinner';
 import { connect } from 'react-redux';
 import { Status, AppRoute, EntriesTab } from '../../../constants';
-import { changeDataAdapterName } from '../../../store/action';
+import { changeEntriesDataAdapter } from '../../../store/action';
 
 function EntriesList({ type, status, data, dataAdapterName, onTabClick }) {
   const changeTabHandler = (evt) => {
@@ -44,7 +44,7 @@ function EntriesList({ type, status, data, dataAdapterName, onTabClick }) {
           ))}
         </ul>
         <table className="table">
-          <ListHead />
+          <ListHead stateField={'entries'} />
           <tbody>
             {data.map((entry, index) => <Entry key={entry.objectInfo.dn} data={entry} count={index + 1}/>)}
           </tbody>
@@ -70,16 +70,16 @@ EntriesList.propTypes = {
   dataAdapterName: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  type: state.entries.type,
-  status: state.entries.status,
-  data: state.entries.data,
-  dataAdapterName: state.entries.dataAdapterName,
+const mapStateToProps = (state, { stateField }) => ({
+  type: state[stateField].type,
+  status: state[stateField].status,
+  data: state[stateField].data,
+  dataAdapterName: state[stateField].dataAdapterName,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onTabClick: (dataAdapterName) => {
-    dispatch(changeDataAdapterName(dataAdapterName));
+    dispatch(changeEntriesDataAdapter(dataAdapterName));
   },
 });
 

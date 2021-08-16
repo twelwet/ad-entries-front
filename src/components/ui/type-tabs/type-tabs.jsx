@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavTabs } from '../../../constants';
+import { fetchStat } from '../../../store/api-actions';
+import { Type } from '../../../constants';
 
-function MainTabs({ type, onTabClick, action, page }) {
+function TypeTabs({ type, onTabClick, action, page }) {
   const tabs = NavTabs[page];
   return (
     <ul className="nav nav-tabs justify-content-left mt-2">
@@ -17,6 +19,7 @@ function MainTabs({ type, onTabClick, action, page }) {
             }}
             className={item.type === type ? 'btn btn-link nav-link active' : 'btn btn-link nav-link'}
             value={item.type}
+            disabled={item.type === type}
           >
             {item.name}
           </button>
@@ -26,7 +29,7 @@ function MainTabs({ type, onTabClick, action, page }) {
   );
 }
 
-MainTabs.propTypes = {
+TypeTabs.propTypes = {
   type: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
   action: PropTypes.func.isRequired,
@@ -40,7 +43,10 @@ const mapStateToProps = (state, { stateField }) => ({
 const mapDispatchToProps = (dispatch) => ({
   onTabClick: (type, action) => {
     dispatch(action(type));
+    if (type === Type.ACCOUNTS || type === Type.EMAILS) {
+      dispatch(fetchStat(type));
+    }
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainTabs);
+export default connect(mapStateToProps, mapDispatchToProps)(TypeTabs);

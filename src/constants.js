@@ -12,9 +12,8 @@ const Type = {
   USER: 'User',
   GROUP: 'Group',
   OU: 'Ou',
-  ESSENTIAL: 'Essential',
-  TOP_BOXES: 'TopBoxes',
-  DISABLED: 'Disabled',
+  ACCOUNTS: 'Accounts',
+  EMAILS: 'Emails',
 };
 
 const SearchField = {
@@ -68,6 +67,8 @@ const APIRoute = {
   [Type.USER]: '/users',
   [Type.OU]: '/ous',
   [Type.GROUP]: '/groups',
+  [Type.ACCOUNTS]: '/accounts',
+  [Type.EMAILS]: '/emails',
 };
 
 const DataAdapterName = {
@@ -85,6 +86,26 @@ const DataAdapterName = {
   [Type.OU]: {
     MAIN: 'main',
     SERVICE: 'service',
+  },
+  [Type.ACCOUNTS]: {
+    MAIN: 'main',
+    CREATION: 'creation',
+    ACTIVITY: 'activity',
+  },
+  [Type.EMAILS]: {
+    MAIN: 'main',
+    CREATION: 'creation',
+    ACTIVITY: 'activity',
+  },
+};
+
+const DataAdapterSetName = {
+  [Type.ACCOUNTS]: {
+    MAIN: 'main',
+  },
+  [Type.EMAILS]: {
+    MAIN: 'main',
+    VOLUME: 'volume',
   },
 };
 
@@ -104,11 +125,38 @@ const TableHead = {
     [DataAdapterName[Type.OU].MAIN]: ['#', 'Название', 'Описание', 'Создан', 'Город', 'Улица'],
     [DataAdapterName[Type.OU].SERVICE]: ['#', 'Название', 'Класс', 'Доменная запись'],
   },
+  [Type.ACCOUNTS]: {
+    [DataAdapterName[Type.ACCOUNTS].MAIN]: ['Всего аккаунтов', 'Задействованных', 'Заблокированых', 'Аккаунтов с почтой'],
+    [DataAdapterName[Type.ACCOUNTS].CREATION]: ['Создано', '2021', '2020', '2019', '2018', '2017', 'Ранее'],
+    [DataAdapterName[Type.ACCOUNTS].ACTIVITY]: ['Активность', '2021', '2020', '2019', '2018', '2017', 'Ни одного логина'],
+  },
+  [Type.EMAILS]: {
+    [DataAdapterName[Type.EMAILS].MAIN]: ['Почтовых аккаунтов', 'Задействованных', 'Заблокированых', 'Общий объем, Gb'],
+    [DataAdapterName[Type.EMAILS].CREATION]: ['Создано', '2021', '2020', '2019', '2018', '2017', 'Ранее'],
+    [DataAdapterName[Type.EMAILS].ACTIVITY]: ['Активность', '2021', '2020', '2019', '2018', '2017', 'Ни одного логина'],
+  },
+};
+
+const DataAdapterSet = {
+  [Type.ACCOUNTS]: {
+    [DataAdapterSetName[Type.ACCOUNTS].MAIN]: [
+      DataAdapterName[Type.ACCOUNTS].MAIN,
+      DataAdapterName[Type.ACCOUNTS].CREATION,
+      DataAdapterName[Type.ACCOUNTS].ACTIVITY,
+    ],
+  },
+  [Type.EMAILS]: {
+    [DataAdapterSetName[Type.EMAILS].MAIN]: [
+      DataAdapterName[Type.EMAILS].MAIN,
+      DataAdapterName[Type.EMAILS].CREATION,
+      DataAdapterName[Type.EMAILS].ACTIVITY,
+    ],
+  },
 };
 
 const EntriesTab = {
   [Type.USER]: [{
-    name:'Основное',
+    name: 'Основное',
     adapter: DataAdapterName[Type.USER].MAIN,
   }, {
     name: 'Почта: подробнее',
@@ -138,6 +186,18 @@ const EntriesTab = {
   }, {
     name: 'Служебное',
     adapter: DataAdapterName[Type.OU].SERVICE,
+  }],
+};
+
+const StatTabs = {
+  [Type.ACCOUNTS]: [{
+    name: 'Основное',
+    adapterSet: DataAdapterSetName[Type.ACCOUNTS].MAIN,
+  }],
+
+  [Type.EMAILS]: [{
+    name: 'Основное',
+    adapterSet: DataAdapterSetName[Type.EMAILS].MAIN,
   }],
 };
 
@@ -181,14 +241,11 @@ const NavTabs = {
     type: Type.OU,
   }],
   [AppRoute.STAT]: [{
-    name: 'Основное',
-    type: Type.ESSENTIAL,
+    name: 'Аккаунты',
+    type: Type.ACCOUNTS,
   }, {
-    name: 'Топ размеров ящиков',
-    type: Type.TOP_BOXES,
-  }, {
-    name: 'Отключенные',
-    type: Type.DISABLED,
+    name: 'Ящики',
+    type: Type.EMAILS,
   }],
 };
 
@@ -204,7 +261,10 @@ export {
   SearchTab,
   TableHead,
   EntriesTab,
+  StatTabs,
   DataAdapterName,
+  DataAdapterSet,
+  DataAdapterSetName,
   MOCK,
   NavTabs
 };

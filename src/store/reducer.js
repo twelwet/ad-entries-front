@@ -1,5 +1,5 @@
 import { ActionType } from './action';
-import { Status, SearchTab, Type, DataAdapterName } from '../constants';
+import { Status, SearchTab, Type, DataAdapterName, DataAdapterSetName } from '../constants';
 
 const initialState = {
   entries: {
@@ -12,7 +12,9 @@ const initialState = {
     error: { message: null },
   },
   stat: {
-    type: Type.ESSENTIAL,
+    type: Type.ACCOUNTS,
+    dataAdapterSetName: DataAdapterSetName[Type.ACCOUNTS].MAIN,
+    status: Status.IDLE,
     data: [],
     error: { message: null },
   },
@@ -48,10 +50,15 @@ export const reducer = (state = initialState, action) => {
         ...state,
         entries: { ...state.entries, field: action.payload },
       };
-    case ActionType.CHANGE_DATA_ADAPTER_NAME:
+    case ActionType.CHANGE_ENTRIES_DATA_ADAPTER:
       return {
         ...state,
         entries: { ...state.entries, dataAdapterName: action.payload },
+      };
+    case ActionType.CHANGE_STAT_DATA_ADAPTER_SET:
+      return {
+        ...state,
+        stat: { ...state.stat, dataAdapterSet: action.payload },
       };
     case ActionType.CHANGE_ENTRIES_TYPE:
       return {
@@ -72,6 +79,30 @@ export const reducer = (state = initialState, action) => {
         stat: {
           ...state.stat,
           type: action.payload,
+          dataAdapterName: DataAdapterName[action.payload].MAIN,
+        },
+      };
+    case ActionType.LOAD_STAT_PENDING:
+      return {
+        ...state,
+        stat: { ...state.stat, status: Status.PENDING },
+      };
+    case ActionType.LOAD_STAT_FULFILLED:
+      return {
+        ...state,
+        stat: {
+          ...state.stat,
+          status: Status.FULFILLED,
+          data: action.payload,
+        },
+      };
+    case ActionType.LOAD_STAT_REJECTED:
+      return {
+        ...state,
+        stat: {
+          ...state.stat,
+          status: Status.REJECTED,
+          error: { message: action.payload },
         },
       };
     default:
