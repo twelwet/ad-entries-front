@@ -79,6 +79,7 @@ export const reducer = (state = initialState, action) => {
         stat: {
           ...state.stat,
           type: action.payload,
+          dataAdapterSetName: DataAdapterSetName[Type.ACCOUNTS].MAIN,
         },
       };
     case ActionType.LOAD_STAT_PENDING:

@@ -70,11 +70,11 @@ EntriesList.propTypes = {
   dataAdapterName: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state, { stateField }) => ({
-  type: state[stateField].type,
-  status: state[stateField].status,
-  data: state[stateField].data,
-  dataAdapterName: state[stateField].dataAdapterName,
+const mapStateToProps = (state) => ({
+  type: state.entries.type,
+  status: state.entries.status,
+  data: state.entries.data,
+  dataAdapterName: state.entries.dataAdapterName,
 });
 
 const mapDispatchToProps = (dispatch) => ({

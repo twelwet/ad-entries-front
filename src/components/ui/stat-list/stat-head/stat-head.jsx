@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { TableHead } from '../../../../constants';
+import { TableHead, Type, DataAdapterName } from '../../../../constants';
 import PropTypes from 'prop-types';
 
 function StatHead({ type, nameOfDataAdapter }) {
@@ -9,7 +9,14 @@ function StatHead({ type, nameOfDataAdapter }) {
       <tr>
         {
           TableHead[type][nameOfDataAdapter].map(
-            (item) => <th className="col-md-1" key={item} scope="col">{item}</th>,
+            (item) => (
+              <th
+                className={nameOfDataAdapter === DataAdapterName[Type.EMAILS].TOP_VOLUME ? '' : 'col-md-1'}
+                key={item}
+                scope="col"
+              >
+                {item}
+              </th>),
           )
         }
       </tr>

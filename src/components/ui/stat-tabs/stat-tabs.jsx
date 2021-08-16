@@ -36,7 +36,7 @@ StatTabs.propTypes = {
 
 const mapStateToProps = (state) => ({
   type: state.stat.type,
-  dataAdapterSetName: state.stat.dataAdapterName,
+  dataAdapterSetName: state.stat.dataAdapterSetName,
 });
 
 const mapDispatchToProps = (dispatch) => ({

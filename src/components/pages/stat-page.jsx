@@ -7,8 +7,9 @@ import { changeStatType } from '../../store/action';
 import StatTabs from '../ui/stat-tabs/stat-tabs';
 import StatList from '../ui/stat-list/stat-list';
 import { fetchStat } from '../../store/api-actions';
+import statProps from '../../prop-types/stat-data.prop';
 
-function StatPage({ type, page, getStat }) {
+function StatPage({ data, type, page, getStat }) {
   useEffect(() => {
     getStat(type);
   }, []);
@@ -18,6 +19,7 @@ function StatPage({ type, page, getStat }) {
       <MainNav page={page} />
       <TypeTabs action={changeStatType} page={page} stateField={'stat'} />
       <div className="mt-2">
+        <div className="text-end pe-2">Данные от: <b>{data.timeStamp ? data.timeStamp : 'нет информации'}</b></div>
         <StatTabs />
         <StatList />
       </div>
@@ -26,12 +28,14 @@ function StatPage({ type, page, getStat }) {
 }
 
 StatPage.propTypes = {
+  data: statProps,
   type: PropTypes.string.isRequired,
   page: PropTypes.string.isRequired,
   getStat: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  data: state.stat.data,
   type: state.stat.type,
 });
 

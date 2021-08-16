@@ -211,5 +211,6 @@ export const DataAdapter = {
     [DataAdapterName[Type.EMAILS].MAIN]: getEmailsMainAdapter,
     [DataAdapterName[Type.EMAILS].CREATION]: getCreationAdapter,
     [DataAdapterName[Type.EMAILS].ACTIVITY]: getAcivityAdapter,
+    [DataAdapterName[Type.EMAILS].TOP_VOLUME]: getUserEmailDetailsAdapter,
   },
 };

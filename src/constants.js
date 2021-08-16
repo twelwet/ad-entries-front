@@ -96,6 +96,7 @@ const DataAdapterName = {
     MAIN: 'main',
     CREATION: 'creation',
     ACTIVITY: 'activity',
+    TOP_VOLUME: 'top-volume',
   },
 };
 
@@ -105,7 +106,7 @@ const DataAdapterSetName = {
   },
   [Type.EMAILS]: {
     MAIN: 'main',
-    VOLUME: 'volume',
+    TOP_VOLUME: 'top-volume',
   },
 };
 
@@ -134,6 +135,7 @@ const TableHead = {
     [DataAdapterName[Type.EMAILS].MAIN]: ['Почтовых аккаунтов', 'Задействованных', 'Заблокированых', 'Общий объем, Gb'],
     [DataAdapterName[Type.EMAILS].CREATION]: ['Создано', '2021', '2020', '2019', '2018', '2017', 'Ранее'],
     [DataAdapterName[Type.EMAILS].ACTIVITY]: ['Активность', '2021', '2020', '2019', '2018', '2017', 'Ни одного логина'],
+    [DataAdapterName[Type.EMAILS].TOP_VOLUME]: ['#', 'Полное имя', 'Email', 'Размер', 'Квота', 'Создан', 'Заходил', 'Организация'],
   },
 };
 
@@ -150,6 +152,9 @@ const DataAdapterSet = {
       DataAdapterName[Type.EMAILS].MAIN,
       DataAdapterName[Type.EMAILS].CREATION,
       DataAdapterName[Type.EMAILS].ACTIVITY,
+    ],
+    [DataAdapterSetName[Type.EMAILS].TOP_VOLUME]: [
+      DataAdapterName[Type.EMAILS].TOP_VOLUME,
     ],
   },
 };
@@ -198,6 +203,9 @@ const StatTabs = {
   [Type.EMAILS]: [{
     name: 'Основное',
     adapterSet: DataAdapterSetName[Type.EMAILS].MAIN,
+  }, {
+    name: 'Топ-100',
+    adapterSet: DataAdapterSetName[Type.EMAILS].TOP_VOLUME,
   }],
 };
 

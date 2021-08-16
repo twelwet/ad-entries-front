@@ -13,7 +13,7 @@ function SearchPage({ page }) {
       <TypeTabs action={changeEntriesType} page={page} stateField={'entries'}/>
       <div className="m-2">
         <SearchBlock />
-        <EntriesList stateField={'entries'} />
+        <EntriesList />
       </div>
     </>
   );
