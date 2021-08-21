@@ -97,6 +97,7 @@ const DataAdapterName = {
     CREATION: 'creation',
     ACTIVITY: 'activity',
     TOP_VOLUME: 'top-volume',
+    VOLUMES: 'volumes',
   },
 };
 
@@ -136,6 +137,7 @@ const TableHead = {
     [DataAdapterName[Type.EMAILS].CREATION]: ['Создано', '2021', '2020', '2019', '2018', '2017', 'Ранее'],
     [DataAdapterName[Type.EMAILS].ACTIVITY]: ['Активность', '2021', '2020', '2019', '2018', '2017', 'Ни одного логина'],
     [DataAdapterName[Type.EMAILS].TOP_VOLUME]: ['#', 'Полное имя', 'Email', 'Размер', 'Квота', 'Создан', 'Заходил', 'Организация'],
+    [DataAdapterName[Type.EMAILS].VOLUMES]: ['Ящики по объемам', 'До 100 Mb', '100-500 Mb', '0,5-1 Gb', '1-5 Gb', '5-10 Gb', 'Более 10 Gb'],
   },
 };
 
@@ -152,6 +154,7 @@ const DataAdapterSet = {
       DataAdapterName[Type.EMAILS].MAIN,
       DataAdapterName[Type.EMAILS].CREATION,
       DataAdapterName[Type.EMAILS].ACTIVITY,
+      DataAdapterName[Type.EMAILS].VOLUMES,
     ],
     [DataAdapterSetName[Type.EMAILS].TOP_VOLUME]: [
       DataAdapterName[Type.EMAILS].TOP_VOLUME,

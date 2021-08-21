@@ -186,6 +186,11 @@ const getEmailsMainAdapter = (dataFromAPI) => {
   ];
 };
 
+const getVolumes = (dataFromAPI) => {
+  const { count, volumes } = dataFromAPI;
+  return [count.all].concat(volumes);
+};
+
 export const DataAdapter = {
   [Type.USER]: {
     [DataAdapterName[Type.USER].MAIN]: getUserMainAdapter,
@@ -212,5 +217,6 @@ export const DataAdapter = {
     [DataAdapterName[Type.EMAILS].CREATION]: getCreationAdapter,
     [DataAdapterName[Type.EMAILS].ACTIVITY]: getAcivityAdapter,
     [DataAdapterName[Type.EMAILS].TOP_VOLUME]: getUserEmailDetailsAdapter,
+    [DataAdapterName[Type.EMAILS].VOLUMES]: getVolumes,
   },
 };
