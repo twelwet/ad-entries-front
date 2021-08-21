@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchEntriesByQuery } from '../../../store/api-actions';
 import { changeSearchField } from '../../../store/action';
+import {Status} from '../../../constants';
 
-function SearchBlock({ searchTabs, type, field, getEntriesByQuery, onRadioClick }) {
+function SearchBlock({ status, searchTabs, type, field, getEntriesByQuery, onRadioClick }) {
   const [text, setText] = useState('');
   const searchRef = useRef();
 
@@ -64,6 +65,7 @@ function SearchBlock({ searchTabs, type, field, getEntriesByQuery, onRadioClick 
         value={text}
         onChange={handleText}
         required
+        disabled={status === Status.PENDING}
       />
       <div className="text-secondary float-end p-2">Поиск записей <b>{type}</b> по атрибуту <b>{field}</b></div>
     </form>
@@ -71,6 +73,7 @@ function SearchBlock({ searchTabs, type, field, getEntriesByQuery, onRadioClick 
 }
 
 SearchBlock.propTypes = {
+  status: PropTypes.string.isRequired,
   searchTabs: PropTypes.arrayOf(PropTypes.shape({
     NAME: PropTypes.string.isRequired,
     FIELD: PropTypes.string.isRequired,
@@ -82,6 +85,7 @@ SearchBlock.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  status: state.entries.status,
   searchTabs: state.entries.searchTabs,
   type: state.entries.type,
   field: state.entries.field,
