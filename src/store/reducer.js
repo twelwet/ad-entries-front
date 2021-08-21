@@ -15,7 +15,7 @@ const initialState = {
     type: Type.ACCOUNTS,
     dataAdapterSetName: DataAdapterSetName[Type.ACCOUNTS].MAIN,
     status: Status.IDLE,
-    data: [],
+    data: {},
     error: { message: null },
   },
 };
