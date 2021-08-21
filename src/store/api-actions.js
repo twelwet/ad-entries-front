@@ -19,8 +19,6 @@ export const fetchEntriesByQuery = (type, field, query) => (dispatch, _getState,
 
 export const fetchStat = (type) => (dispatch, _getState, api) => {
   dispatch(loadStatPending());
-  /* eslint-disable no-console */
-  console.log(APIRoute[type]);
   return api.get(APIRoute[type])
     .then(({data}) => dispatch(loadStatFulfilled(data)))
     .catch((error) => handleAPIError(error, dispatch, loadStatRejected));
