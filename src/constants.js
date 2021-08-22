@@ -98,6 +98,8 @@ const DataAdapterName = {
     ACTIVITY: 'activity',
     TOP_VOLUME: 'top-volume',
     VOLUMES: 'volumes',
+    QUOTAS: 'quotas',
+    SUM_SIZE: 'sumSize',
   },
 };
 
@@ -138,6 +140,8 @@ const TableHead = {
     [DataAdapterName[Type.EMAILS].ACTIVITY]: ['Активность', '2021', '2020', '2019', '2018', '2017', 'Ни одного логина'],
     [DataAdapterName[Type.EMAILS].TOP_VOLUME]: ['#', 'Полное имя', 'Email', 'Размер', 'Квота', 'Создан', 'Заходил', 'Организация'],
     [DataAdapterName[Type.EMAILS].VOLUMES]: ['Ящики по объемам', 'До 100 Mb', '100-500 Mb', '0,5-1 Gb', '1-5 Gb', '5-10 Gb', 'Более 10 Gb'],
+    [DataAdapterName[Type.EMAILS].QUOTAS]: ['Найдено квот по ящикам', 'До 100 Mb', '100-500 Mb', '0,5-1 Gb', '1-5 Gb', '5-10 Gb', 'Более 10 Gb'],
+    [DataAdapterName[Type.EMAILS].SUM_SIZE]: ['Суммарный размер ящиков, Gb', 'До 100 Mb', '100-500 Mb', '0,5-1 Gb', '1-5 Gb', '5-10 Gb', 'Более 10 Gb'],
   },
 };
 
@@ -155,6 +159,8 @@ const DataAdapterSet = {
       DataAdapterName[Type.EMAILS].CREATION,
       DataAdapterName[Type.EMAILS].ACTIVITY,
       DataAdapterName[Type.EMAILS].VOLUMES,
+      DataAdapterName[Type.EMAILS].QUOTAS,
+      DataAdapterName[Type.EMAILS].SUM_SIZE,
     ],
     [DataAdapterSetName[Type.EMAILS].TOP_VOLUME]: [
       DataAdapterName[Type.EMAILS].TOP_VOLUME,

@@ -188,7 +188,22 @@ const getEmailsMainAdapter = (dataFromAPI) => {
 
 const getVolumes = (dataFromAPI) => {
   const { count, volumes } = dataFromAPI;
-  return [count.all].concat(volumes);
+  const volumesCounts = volumes.map((item) => item.count);
+  return [count.all].concat(volumesCounts);
+};
+
+const getQuotas = (dataFromAPI) => {
+  const { volumes } = dataFromAPI;
+  const quotasCounts = volumes.map((item) => item.quotas);
+  const allQuotas = quotasCounts.reduce((accumulator, currentValue) => accumulator + currentValue);
+  return [allQuotas].concat(quotasCounts);
+};
+
+const getSumSizeByBoxSelections = (dataFromAPI) => {
+  const { volumes } = dataFromAPI;
+  const sumSizesByBoxSelections = volumes.map((item) => item.summarySize);
+  const allBoxesSize = sumSizesByBoxSelections.reduce((accumulator, currentValue) => accumulator + currentValue);
+  return [allBoxesSize].concat(sumSizesByBoxSelections);
 };
 
 export const DataAdapter = {
@@ -218,5 +233,7 @@ export const DataAdapter = {
     [DataAdapterName[Type.EMAILS].ACTIVITY]: getAcivityAdapter,
     [DataAdapterName[Type.EMAILS].TOP_VOLUME]: getUserEmailDetailsAdapter,
     [DataAdapterName[Type.EMAILS].VOLUMES]: getVolumes,
+    [DataAdapterName[Type.EMAILS].QUOTAS]: getQuotas,
+    [DataAdapterName[Type.EMAILS].SUM_SIZE]: getSumSizeByBoxSelections,
   },
 };
